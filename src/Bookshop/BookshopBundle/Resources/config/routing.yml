@@ -1,0 +1,3 @@
+bookshop_bookshop_homepage:
+    pattern:  /
+    defaults: { _controller: BookshopBookshopBundle:Page:index }
