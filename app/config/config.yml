@@ -69,3 +69,7 @@ assetic:
     bundles:    [BookshopBookshopBundle]
     filters:
         cssrewrite: ~
+        
+hautelook_alice:
+    locale: en_US   
+    seed: 1  
