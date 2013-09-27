@@ -18,7 +18,7 @@ class Product
     
     
       /**
-     * @ORM\OneToOne(targetEntity="Image", mappedBy="products")
+     * @ORM\OneToOne(targetEntity="Image", mappedBy="product")
      */
     protected $image;
     
