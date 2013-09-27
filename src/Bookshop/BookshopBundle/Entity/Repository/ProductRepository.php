@@ -12,4 +12,19 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProductRepository extends EntityRepository
 {
+    
+  public function getLatestProducts($limit = null)
+  {
+    $qb = $this->createQueryBuilder('p')
+               ->select('p')
+//               ->leftJoin('p.comments', 'c')
+               ->addOrderBy('p.id', 'DESC');
+
+    if (false === is_null($limit))
+        $qb->setMaxResults($limit);
+
+    return $qb->getQuery()
+              ->getResult();
+  }
+
 }
