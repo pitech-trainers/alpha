@@ -1,22 +1,23 @@
 <!DOCTYPE html>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>{% block title %}MyBooks{% endblock %}</title>
         <meta name="description" content="Default Description" />
         {% block stylesheets %}
-   {% stylesheets
-    'bundles/bookshopbookshop/css/*'
-    filter='cssrewrite'
-    %}
-    <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
-{% endstylesheets %}
+   
+    <link href="{{ asset('bundles/bookshopbookshop/css/styles.css') }}" rel="stylesheet" media="screen" />
+    <link href="{{ asset('bundles/bookshopbookshop/css/widgets.css') }}" rel="stylesheet" media="screen" />
+
+    
         {% endblock %}
          {% block javascripts %}
         <script type="text/javascript" src="{{asset('js/prototype/prototype.js')}}"></script>
         {% endblock %}
     </head>
     <body>
+       
         <div class="wrapper">
             {% block header %}
                 <div class="header-container">
@@ -43,20 +44,7 @@
                 {% endblock %}
                  {% block menu %}
             <div class="nav-container">
-                <ul id="nav">
-                    <li class="level0 nav-1 level-top first">
-                        <a href="#" class="level-top" ><span>Furniture</span></a>
-                    </li>
-                    <li class="level0 nav-2 level-top">
-                        <a href="#"  class="level-top" ><span>Electronics</span></a>
-                    </li>
-                    <li class="level0 nav-3 level-top active">
-                        <a href="#" class="level-top" ><span>Music</span></a>
-                    </li>
-                    <li class="level0 nav-4 level-top last">
-                        <a href="#"  class="level-top" ><span>Ebooks</span></a>
-                    </li>
-                </ul>
+                    {{ knp_menu_render('BookshopBookshopBundle:Builder:categoryMenu') }}
             </div>
                 {% endblock %}
        
