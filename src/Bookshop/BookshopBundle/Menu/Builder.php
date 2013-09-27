@@ -27,4 +27,22 @@ class Builder extends ContainerAware
         
         return $menu;
     }
+    
+    public function categoryMenu(FactoryInterface $factory, array $options)
+    {
+        $menu = $factory->createItem('root');
+        $menu->setChildrenAttribute('id', 'nav');
+        $em = $this->container->get('doctrine')
+                   ->getManager();
+
+        $categories = $em->getRepository('BookshopBookshopBundle:Category')
+                    ->findAll();
+        
+        foreach ($categories as $category)
+        {
+            $menu->addChild($category->getLabel(), array('route' => 'bookshop_bookshop_homepage'));
+        }
+        
+        return $menu;
+    }
 }
