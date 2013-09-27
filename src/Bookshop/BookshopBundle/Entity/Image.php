@@ -16,10 +16,12 @@ class Image
      */
     protected $id;
     
-     /**
-     * @ORM\Column(type="integer")
+      /**
+     * @ORM\OneToOne(targetEntity="Product", inversedBy="image")
+     * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
      */
-    protected $product_id;
+   
+    protected $product;
 
     /**
      * @ORM\Column(type="string")
@@ -108,5 +110,28 @@ class Image
     public function getFilename()
     {
         return $this->filename;
+    }
+
+    /**
+     * Set product
+     *
+     * @param \Bookshop\BookshopBundle\Entity\Product $product
+     * @return Image
+     */
+    public function setProduct(\Bookshop\BookshopBundle\Entity\Product $product = null)
+    {
+        $this->product = $product;
+    
+        return $this;
+    }
+
+    /**
+     * Get product
+     *
+     * @return \Bookshop\BookshopBundle\Entity\Product 
+     */
+    public function getProduct()
+    {
+        return $this->product;
     }
 }

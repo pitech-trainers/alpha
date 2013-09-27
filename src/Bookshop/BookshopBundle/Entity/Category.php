@@ -21,7 +21,11 @@ class Category
      */
     protected $label;
     
-
+    /**
+     * @ORM\OneToMany(targetEntity="Product", mappedBy="categories")
+     */
+    protected $products;
+    
     /**
      * Get id
      *
@@ -53,5 +57,45 @@ class Category
     public function getLabel()
     {
         return $this->label;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->products = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add products
+     *
+     * @param \Bookshop\BookshopBundle\Entity\Product $products
+     * @return Category
+     */
+    public function addProduct(\Bookshop\BookshopBundle\Entity\Product $products)
+    {
+        $this->products[] = $products;
+    
+        return $this;
+    }
+
+    /**
+     * Remove products
+     *
+     * @param \Bookshop\BookshopBundle\Entity\Product $products
+     */
+    public function removeProduct(\Bookshop\BookshopBundle\Entity\Product $products)
+    {
+        $this->products->removeElement($products);
+    }
+
+    /**
+     * Get products
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProducts()
+    {
+        return $this->products;
     }
 }
