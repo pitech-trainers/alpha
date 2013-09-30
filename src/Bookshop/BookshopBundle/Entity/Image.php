@@ -15,14 +15,7 @@ class Image
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-    
-      /**
-     * @ORM\OneToOne(targetEntity="Product", inversedBy="image")
-     * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
-     */
-   
-    protected $product;
-
+ 
     /**
      * @ORM\Column(type="string")
      */
@@ -32,6 +25,7 @@ class Image
      * @ORM\Column(type="string")
      */
     protected $filename;
+
 
     /**
      * Get id
@@ -44,33 +38,10 @@ class Image
     }
 
     /**
-     * Set product_id
-     *
-     * @param integer $productId
-     * @return Images
-     */
-    public function setProductId($productId)
-    {
-        $this->product_id = $productId;
-    
-        return $this;
-    }
-
-    /**
-     * Get product_id
-     *
-     * @return integer 
-     */
-    public function getProductId()
-    {
-        return $this->product_id;
-    }
-
-    /**
      * Set path
      *
      * @param string $path
-     * @return Images
+     * @return Image
      */
     public function setPath($path)
     {
@@ -93,7 +64,7 @@ class Image
      * Set filename
      *
      * @param string $filename
-     * @return Images
+     * @return Image
      */
     public function setFilename($filename)
     {
@@ -110,28 +81,5 @@ class Image
     public function getFilename()
     {
         return $this->filename;
-    }
-
-    /**
-     * Set product
-     *
-     * @param \Bookshop\BookshopBundle\Entity\Product $product
-     * @return Image
-     */
-    public function setProduct(\Bookshop\BookshopBundle\Entity\Product $product = null)
-    {
-        $this->product = $product;
-    
-        return $this;
-    }
-
-    /**
-     * Get product
-     *
-     * @return \Bookshop\BookshopBundle\Entity\Product 
-     */
-    public function getProduct()
-    {
-        return $this->product;
     }
 }
