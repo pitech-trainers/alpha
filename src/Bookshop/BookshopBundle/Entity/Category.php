@@ -2,6 +2,8 @@
 namespace Bookshop\BookshopBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+
 
 /**
  * @ORM\Entity(repositoryClass="Bookshop\BookshopBundle\Entity\Repository\CategoryRepository")
@@ -21,7 +23,20 @@ class Category
      */
     protected $label;
     
+    /**
+     * @ORM\OneToMany(targetEntity="Product", mappedBy="category")
+     */
+    protected $products;
 
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->products = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
     /**
      * Get id
      *
@@ -53,5 +68,38 @@ class Category
     public function getLabel()
     {
         return $this->label;
+    }
+
+    /**
+     * Add products
+     *
+     * @param \Bookshop\BookshopBundle\Entity\Product $products
+     * @return Category
+     */
+    public function addProduct(\Bookshop\BookshopBundle\Entity\Product $products)
+    {
+        $this->products[] = $products;
+    
+        return $this;
+    }
+
+    /**
+     * Remove products
+     *
+     * @param \Bookshop\BookshopBundle\Entity\Product $products
+     */
+    public function removeProduct(\Bookshop\BookshopBundle\Entity\Product $products)
+    {
+        $this->products->removeElement($products);
+    }
+
+    /**
+     * Get products
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProducts()
+    {
+        return $this->products;
     }
 }

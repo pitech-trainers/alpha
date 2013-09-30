@@ -43,9 +43,6 @@ class Builder extends ContainerAware
             $menu->addChild($category->getLabel(), array('route' => 'bookshop_bookshop_homepage'));
         }
         
-        
-      
-        
         return $menu;
     }
 }
