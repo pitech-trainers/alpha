@@ -1,10 +1,13 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: @BookshopBookshopBundle/Resources/config/services.yml }
 
+parameters:
+    locale: en # default locale
 framework:
     #esi:             ~
-    #translator:      { fallback: %locale% }
+    translator:      { fallback: %locale% }
     secret:          %secret%
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -12,6 +15,7 @@ framework:
     form:            ~
     csrf_protection: ~
     validation:      { enable_annotations: true }
+    
     templating:
         engines: ['twig']
         #assets_version: SomeVersionScheme
@@ -68,3 +72,22 @@ swiftmailer:
 assetic:
     bundles:    [BookshopBookshopBundle]
   
+   
+fos_user:
+    db_driver: orm 
+    firewall_name: main
+    user_class: Bookshop\BookshopBundle\Entity\User
+    service:
+        mailer: fos_user.mailer.twig_swift
+    registration:
+        form:
+            type: bookshop_user_registration
+            
+        confirmation:
+            enabled: true
+          
+    resetting:
+        email:
+            from_email:
+                address: resetting@acmedemo.com
+                sender_name: Acme Demo Resetting
