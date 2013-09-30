@@ -11,9 +11,7 @@ use Symfony\Component\DependencyInjection\ContainerAware;
 
 
 class DataLoader  extends ContainerAware implements FixtureInterface
-{
-//    protected static $path = "/home/forban/Sites/alpha/src/Bookshop/BookshopBundle/Resources/config/Fixtures/Data.yml";
-   
+{   
     public function load(ObjectManager $manager)
     {
         $loader = new \Nelmio\Alice\Loader\Yaml();
