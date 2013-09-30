@@ -16,9 +16,10 @@ class Product
      */
     protected $id;
     
-    
+     
       /**
-     * @ORM\OneToOne(targetEntity="Image", mappedBy="product")
+     * @ORM\OneToOne(targetEntity="Image")
+     * @ORM\JoinColumn(name="imageId", referencedColumnName="id")
      */
     protected $image;
     
@@ -29,7 +30,7 @@ class Product
     
      /**
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="products")
-     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="categoryId", referencedColumnName="id")
      */
     protected $category;
     
@@ -38,9 +39,10 @@ class Product
      */
     protected $price;
     
-     /**
-     * @ORM\OneToMany(targetEntity="Author", mappedBy="products")
-     */
+      /**
+     * @ORM\ManyToOne(targetEntity="Author")
+     * @ORM\JoinColumn(name="authorId", referencedColumnName="id")
+ */
     protected $authors;
     
      /**
@@ -51,7 +53,7 @@ class Product
      /**
      * @ORM\Column(type="string")
      */
-    protected $appereance_year;
+    protected $appereanceYear;
     
      /**
      * @ORM\Column(type="string")
@@ -61,7 +63,7 @@ class Product
      /**
      * @ORM\Column(type="string")
      */
-    protected $short_description;
+    protected $shortDescription;
     
      /**
      * @ORM\Column(type="integer")
@@ -72,6 +74,8 @@ class Product
      * @ORM\Column(type="boolean")
      */
     protected $active;
+
+
 
     /**
      * Get id
@@ -107,29 +111,6 @@ class Product
     }
 
     /**
-     * Set category_id
-     *
-     * @param integer $category_Id
-     * @return Product
-     */
-    public function setCategory_Id($category_Id)
-    {
-        $this->category_id = $category_Id;
-    
-        return $this;
-    }
-
-    /**
-     * Get category_id
-     *
-     * @return integer 
-     */
-    public function getCategory_Id()
-    {
-        return $this->category_id;
-    }
-
-    /**
      * Set price
      *
      * @param float $price
@@ -150,29 +131,6 @@ class Product
     public function getPrice()
     {
         return $this->price;
-    }
-
-    /**
-     * Set author_id
-     *
-     * @param string $authorId
-     * @return Product
-     */
-    public function setAuthorId($authorId)
-    {
-        $this->author_id = $authorId;
-    
-        return $this;
-    }
-
-    /**
-     * Get author_id
-     *
-     * @return string 
-     */
-    public function getAuthorId()
-    {
-        return $this->author_id;
     }
 
     /**
@@ -199,26 +157,26 @@ class Product
     }
 
     /**
-     * Set appereance_year
+     * Set appereanceYear
      *
      * @param string $appereanceYear
      * @return Product
      */
     public function setAppereanceYear($appereanceYear)
     {
-        $this->appereance_year = $appereanceYear;
+        $this->appereanceYear = $appereanceYear;
     
         return $this;
     }
 
     /**
-     * Get appereance_year
+     * Get appereanceYear
      *
      * @return string 
      */
     public function getAppereanceYear()
     {
-        return $this->appereance_year;
+        return $this->appereanceYear;
     }
 
     /**
@@ -245,26 +203,26 @@ class Product
     }
 
     /**
-     * Set short_description
+     * Set shortDescription
      *
      * @param string $shortDescription
      * @return Product
      */
     public function setShortDescription($shortDescription)
     {
-        $this->short_description = $shortDescription;
+        $this->shortDescription = $shortDescription;
     
         return $this;
     }
 
     /**
-     * Get short_description
+     * Get shortDescription
      *
      * @return string 
      */
     public function getShortDescription()
     {
-        return $this->short_description;
+        return $this->shortDescription;
     }
 
     /**
@@ -335,14 +293,7 @@ class Product
     {
         return $this->image;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->authors = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-    
+
     /**
      * Set category
      *
@@ -367,32 +318,22 @@ class Product
     }
 
     /**
-     * Add authors
+     * Set authors
      *
      * @param \Bookshop\BookshopBundle\Entity\Author $authors
      * @return Product
      */
-    public function addAuthor(\Bookshop\BookshopBundle\Entity\Author $authors)
+    public function setAuthors(\Bookshop\BookshopBundle\Entity\Author $authors = null)
     {
-        $this->authors[] = $authors;
+        $this->authors = $authors;
     
         return $this;
     }
 
     /**
-     * Remove authors
-     *
-     * @param \Bookshop\BookshopBundle\Entity\Author $authors
-     */
-    public function removeAuthor(\Bookshop\BookshopBundle\Entity\Author $authors)
-    {
-        $this->authors->removeElement($authors);
-    }
-
-    /**
      * Get authors
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Bookshop\BookshopBundle\Entity\Author 
      */
     public function getAuthors()
     {

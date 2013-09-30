@@ -2,6 +2,8 @@
 namespace Bookshop\BookshopBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+
 
 /**
  * @ORM\Entity(repositoryClass="Bookshop\BookshopBundle\Entity\Repository\CategoryRepository")
@@ -22,9 +24,18 @@ class Category
     protected $label;
     
     /**
-     * @ORM\OneToMany(targetEntity="Product", mappedBy="categories")
+     * @ORM\OneToMany(targetEntity="Product", mappedBy="category")
      */
     protected $products;
+
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->products = new \Doctrine\Common\Collections\ArrayCollection();
+    }
     
     /**
      * Get id
@@ -58,14 +69,7 @@ class Category
     {
         return $this->label;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->products = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-    
+
     /**
      * Add products
      *
