@@ -43,20 +43,7 @@
                 {% endblock %}
                  {% block menu %}
             <div class="nav-container">
-                <ul id="nav">
-                    <li class="level0 nav-1 level-top first">
-                        <a href="#" class="level-top" ><span>Furniture</span></a>
-                    </li>
-                    <li class="level0 nav-2 level-top">
-                        <a href="#"  class="level-top" ><span>Electronics</span></a>
-                    </li>
-                    <li class="level0 nav-3 level-top active">
-                        <a href="#" class="level-top" ><span>Music</span></a>
-                    </li>
-                    <li class="level0 nav-4 level-top last">
-                        <a href="#"  class="level-top" ><span>Ebooks</span></a>
-                    </li>
-                </ul>
+                    {{ knp_menu_render('BookshopBookshopBundle:Builder:categoryMenu') }}
             </div>
                 {% endblock %}
        
