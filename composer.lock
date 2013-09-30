@@ -3,11 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-<<<<<<< HEAD
-    "hash": "e91f755e3722920243e19af548189d90",
-=======
-    "hash": "a4cddd04cf2ae2a85e55c1881f15e3e7",
->>>>>>> 96b31759d98356db1c68512806d246aecf033631
+    "hash": "92131aa1a1bc678da213b454aee4f1d9",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -830,7 +826,6 @@
             "time": "2013-05-11 07:51:12"
         },
         {
-<<<<<<< HEAD
             "name": "friendsofsymfony/user-bundle",
             "version": "dev-master",
             "target-dir": "FOS/UserBundle",
@@ -866,7 +861,40 @@
             "extra": {
                 "branch-alias": {
                     "dev-master": "2.0.x-dev"
-=======
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "FOS\\UserBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christophe Coevoet",
+                    "email": "stof@notk.org"
+                },
+                {
+                    "name": "Thibault Duplessis",
+                    "email": "thibault.duplessis@gmail.com",
+                    "homepage": "http://ornicar.github.com"
+                },
+                {
+                    "name": "FriendsOfSymfony Community",
+                    "homepage": "https://github.com/friendsofsymfony/FOSUserBundle/contributors"
+                }
+            ],
+            "description": "Symfony FOSUserBundle",
+            "homepage": "http://friendsofsymfony.github.com",
+            "keywords": [
+                "User management"
+            ],
+            "time": "2013-09-23 12:09:51"
+        },
+        {
             "name": "fzaninotto/faker",
             "version": "v1.2.0",
             "source": {
@@ -887,17 +915,12 @@
             "extra": {
                 "branch-alias": {
                     "dev-master": "1.2.x-dev"
->>>>>>> 96b31759d98356db1c68512806d246aecf033631
                 }
             },
             "autoload": {
                 "psr-0": {
-<<<<<<< HEAD
-                    "FOS\\UserBundle": ""
-=======
                     "Faker": "src/",
                     "Faker\\PHPUnit": "test/"
->>>>>>> 96b31759d98356db1c68512806d246aecf033631
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -906,27 +929,6 @@
             ],
             "authors": [
                 {
-<<<<<<< HEAD
-                    "name": "Christophe Coevoet",
-                    "email": "stof@notk.org"
-                },
-                {
-                    "name": "Thibault Duplessis",
-                    "email": "thibault.duplessis@gmail.com",
-                    "homepage": "http://ornicar.github.com"
-                },
-                {
-                    "name": "FriendsOfSymfony Community",
-                    "homepage": "https://github.com/friendsofsymfony/FOSUserBundle/contributors"
-                }
-            ],
-            "description": "Symfony FOSUserBundle",
-            "homepage": "http://friendsofsymfony.github.com",
-            "keywords": [
-                "User management"
-            ],
-            "time": "2013-09-23 12:09:51"
-=======
                     "name": "François Zaninotto"
                 }
             ],
@@ -987,7 +989,6 @@
                 "orm"
             ],
             "time": "2013-09-17 17:20:36"
->>>>>>> 96b31759d98356db1c68512806d246aecf033631
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -2061,15 +2062,10 @@
     "stability-flags": {
         "knplabs/knp-menu": 20,
         "knplabs/knp-menu-bundle": 20,
-<<<<<<< HEAD
-        "doctrine/doctrine-fixtures-bundle": 20,
         "doctrine/data-fixtures": 20,
-        "friendsofsymfony/user-bundle": 20
-=======
-        "doctrine/data-fixtures": 20,
+        "friendsofsymfony/user-bundle": 20,
         "doctrine/doctrine-migrations-bundle": 20,
         "doctrine/migrations": 20
->>>>>>> 96b31759d98356db1c68512806d246aecf033631
     },
     "platform": {
         "php": ">=5.3.3"

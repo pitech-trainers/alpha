@@ -21,18 +21,18 @@
         "knplabs/knp-menu": "2.0.*@dev",
         "knplabs/knp-menu-bundle": "2.0.*@dev",
         "incenteev/composer-parameter-handler": "~2.0",
-<<<<<<< HEAD
+
         "doctrine/doctrine-fixtures-bundle": "dev-master",
         "doctrine/data-fixtures" : "dev-master",
-        "friendsofsymfony/user-bundle": "~2.0@dev"
+        "friendsofsymfony/user-bundle": "~2.0@dev",
         
-=======
+
         "doctrine/data-fixtures": "dev-master",
 	"doctrine/doctrine-fixtures-bundle": "2.2.*",
         "doctrine/doctrine-migrations-bundle": "dev-master",
         "doctrine/migrations": "dev-master",
 	"hautelook/alice-bundle": "0.1.*"
->>>>>>> 96b31759d98356db1c68512806d246aecf033631
+
     },
     "scripts": {
         "post-install-cmd": [

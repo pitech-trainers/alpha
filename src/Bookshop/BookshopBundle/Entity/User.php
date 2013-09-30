@@ -21,12 +21,12 @@ class User extends BaseUser {
     /**
      * @ORM\Column(type="string")
      * 
-     * @Assert\NotBlank(message="Please enter your first name.", groups={"Registration", "Profile"})
+    
      */
     protected $firstname;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="integer")
      */
     protected $gender;
 
@@ -36,17 +36,18 @@ class User extends BaseUser {
     protected $lastname;
 
     /**
-     * @ORM\Column(type="string")
-     *  * @Assert\Length(
-     * min=3,
-     * max="20",
-     * minMessage="Invalid phone number (must contain 10 digits).",
-     * maxMessage="Invalid phone number (must contain 10 digits).",
-     * groups={"Registration", "Profile"}
-     * )
+     * @ORM\Column(type="integer")
+ 
+     * 
      */
     protected $mobile;
 
+       /**
+     * @ORM\Column(type="integer")
+ 
+     * 
+     */
+    protected $cart;
     public function __construct() {
         parent::__construct();
         // your ow

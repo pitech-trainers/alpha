@@ -1,9 +1,15 @@
 parameters:
 #    bookshop_bookshop.example.class: Bookshop\BookshopBundle\Example
+     finder.class: Symfony\Component\Finder\Finder
 
 services:
+
     fos_user.registration.form.type:
         class: Bookshop\BookshopBundle\Form\Type\RegistrationFormType
         arguments: [%fos_user.model.user.class%]
         tags:
             - { name: form.type, alias: bookshop_user_registration }
+
+
+    finder:
+        class: "%finder.class%"

@@ -1,7 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-    - { resource: @BookshopBookshopBundle/Resources/config/services.yml }
+    - { resource: "@BookshopBookshopBundle/Resources/config/services.yml" }
 
 parameters:
     locale: en # default locale
@@ -71,8 +71,7 @@ swiftmailer:
     
 assetic:
     bundles:    [BookshopBookshopBundle]
-<<<<<<< HEAD
-  
+
    
 fos_user:
     db_driver: orm 
@@ -92,11 +91,7 @@ fos_user:
             from_email:
                 address: resetting@acmedemo.com
                 sender_name: Acme Demo Resetting
-=======
-    filters:
-        cssrewrite: ~
+
+
         
-hautelook_alice:
-    locale: en_US   
-    seed: 1  
->>>>>>> 96b31759d98356db1c68512806d246aecf033631
+
