@@ -1,3 +1,10 @@
 bookshop_bookshop_homepage:
     pattern:  /
     defaults: { _controller: BookshopBookshopBundle:Page:index }
+    
+bookshop_bookshop_category:
+    pattern:  /cid={cid}
+    defaults: { _controller: BookshopBookshopBundle:Page:categoryPage }
+    requirements:
+       _method:  GET
+       id: \d+

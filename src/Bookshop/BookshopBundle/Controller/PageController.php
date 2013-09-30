@@ -17,4 +17,18 @@ class PageController extends Controller
             'products' => $products
         ));
     }
+    
+    public function categoryPageAction($cid)
+    {
+        $em = $this->getDoctrine()
+                   ->getManager();
+        
+        $category = $em->getRepository('BookshopBookshopBundle:Category')->find($cid);
+        $products = $category->getProducts();
+        
+    return $this->render('BookshopBookshopBundle:Page:categoryPage.html.twig', array(
+            'products' => $products
+        ));
+    }
+    
 }
