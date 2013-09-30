@@ -21,7 +21,7 @@
                                 <div class="page-title category-title">
                                     <h1>Music</h1>
                                 </div>
-
+{% if (products|length >0 ) %}
                                 <div class="category-products">
                                     <div class="toolbar">
                                         <div class="pager">
@@ -44,6 +44,7 @@
                                         </div>
 
 
+                                         
                                         <div class="sorter">
                                             <div class="sort-by">
                                                 <form>
@@ -63,6 +64,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                        {% endif %}
 <ul class="products-grid">
                     {% for product in products %}
                                    
@@ -136,6 +138,7 @@
                                 <p>There are no products...</p>
                             {% endfor %}	
                                 </ul> 
+                                        {% if (products|length >0 ) %}
                                     <div class="toolbar-bottom">
                                         <div class="toolbar">
                                             <div class="pager">
@@ -177,6 +180,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                         {% endif %}
                                 </div>
                             </div>
                                  {% block leftsidebar%}{% endblock %}
