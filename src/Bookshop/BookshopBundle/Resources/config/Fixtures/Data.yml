@@ -2,27 +2,31 @@
 ---      
 Bookshop\BookshopBundle\Entity\Category:
     category{1..10}:
-      label: <label()>
+      label (unique): <label()>
+      
+Bookshop\BookshopBundle\Entity\Author:
+     author{1..10}:
+       authorName: <author()>
+       
+Bookshop\BookshopBundle\Entity\Image:
+     image{1..10}:
+       path: "/public/image/"
+       filename (unique): <filename()>
 
 Bookshop\BookshopBundle\Entity\Product:
     product{1..10}:
       title: <title()>
-      category: "@category*"
       price: <price()>
       isbn: <ISBN()>
-      appereance_year: <apperance_year()>
+      appereanceYear: <apperance_year()>
       description: <description()>
-      short_description: <sdescription()>
+      shortDescription: <sdescription()>
       stock: <stock()>
       active: <active()>
+      category: "@category*"
+      authors: "@author*"
+      image (unique): "@image*"
       
-Bookshop\BookshopBundle\Entity\Author:
-     author{1..10}:
-       author_name: <author()>
-       product (unique): "@product*" 
+
          
-Bookshop\BookshopBundle\Entity\Image:
-     image{1..10}:
-       path: "/public/image/"
-       product (unique): "@product*"
-       filename (unique): <filename()>
+
