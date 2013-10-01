@@ -10,13 +10,15 @@ class PageController extends Controller
     {
 
 
-    return $this->render('BookshopBookshopBundle:Page:index.html.twig');
+
 
         $em = $this->getDoctrine()
                    ->getManager();
 
         $products = $em->getRepository('BookshopBookshopBundle:Product')
                     ->getLatestProducts(6);
+//        var_dump($products[0]->getCategory()->getLabel());
+        
     return $this->render('BookshopBookshopBundle:Page:index.html.twig', array(
             'products' => $products
         ));
