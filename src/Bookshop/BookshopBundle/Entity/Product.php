@@ -11,7 +11,6 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Product
 {
-
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
