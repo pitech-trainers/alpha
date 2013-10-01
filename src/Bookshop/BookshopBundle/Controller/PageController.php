@@ -21,6 +21,7 @@ class PageController extends Controller
     
     public function categoryPageAction($cid)
     {
+
         $sort=[];
         $request = Request::createFromGlobals();
         
@@ -40,9 +41,9 @@ class PageController extends Controller
                             $this->get('request')->query->get('page', 1)/*page number*/,
                             3/*limit per page*/
                                   );
-        var_dump($pagination);
          return $this->render('BookshopBookshopBundle:Page:categoryPage.html.twig', array(
                 'pagination' => $pagination
+
         ));
     }
     
