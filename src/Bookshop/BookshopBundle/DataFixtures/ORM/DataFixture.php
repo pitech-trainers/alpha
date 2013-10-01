@@ -18,12 +18,7 @@ class DataLoader  extends ContainerAware implements FixtureInterface
         $faker = new \Faker\Generator();
         $fakerProvider = new \Bookshop\BookshopBundle\Faker\Provider\DataProvider($faker);
         $faker->addProvider($fakerProvider);
-        $finder = $this->container->get("finder");
-        $finder->files()->name('Data.yml')->in('src/Bookshop/BookshopBundle/Resources');     
-
-        foreach ($finder as $file) {
-            $path = $file->getRealpath();
-        }
+        $path=$this->container->get('kernel')->getRootDir().'/../src/Bookshop/BookshopBundle/Resources/config/Fixtures/Data.yml';
 
         Fixtures::load($path, $manager, array('providers' => array($fakerProvider)));
               
