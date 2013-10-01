@@ -26,8 +26,15 @@ class PageController extends Controller
         $category = $em->getRepository('BookshopBookshopBundle:Category')->find($cid);
         $products = $category->getProducts();
         
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+                            $products,
+                            $this->get('request')->query->get('page', 1)/*page number*/,
+                            3/*limit per page*/
+                                  );
+        
     return $this->render('BookshopBookshopBundle:Page:categoryPage.html.twig', array(
-            'products' => $products
+            'pagination' => $pagination
         ));
     }
     
