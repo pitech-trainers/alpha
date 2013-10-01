@@ -1,9 +1,9 @@
 <?php
+
 namespace Bookshop\BookshopBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-
 
 /**
  * @ORM\Entity(repositoryClass="Bookshop\BookshopBundle\Entity\Repository\CategoryRepository")
@@ -22,13 +22,12 @@ class Category
      * @ORM\Column(type="string")
      */
     protected $label;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="Product", mappedBy="category")
      */
     protected $products;
 
-    
     /**
      * Constructor
      */

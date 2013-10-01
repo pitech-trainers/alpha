@@ -1,4 +1,5 @@
 <?php
+
 namespace Bookshop\BookshopBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -17,12 +18,15 @@ class Author
     protected $id;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string" ,name="author_name")
      */
     protected $authorName;
-      
 
-
+    /**
+     * @ORM\ManyToMany(targetEntity="Product", mappedBy="authors")
+     */
+    protected $products;
+    
     /**
      * Get id
      *
@@ -54,5 +58,45 @@ class Author
     public function getAuthorName()
     {
         return $this->authorName;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->products = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add products
+     *
+     * @param \Bookshop\BookshopBundle\Entity\Product $products
+     * @return Author
+     */
+    public function addProduct(\Bookshop\BookshopBundle\Entity\Product $products)
+    {
+        $this->products[] = $products;
+    
+        return $this;
+    }
+
+    /**
+     * Remove products
+     *
+     * @param \Bookshop\BookshopBundle\Entity\Product $products
+     */
+    public function removeProduct(\Bookshop\BookshopBundle\Entity\Product $products)
+    {
+        $this->products->removeElement($products);
+    }
+
+    /**
+     * Get products
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProducts()
+    {
+        return $this->products;
     }
 }
