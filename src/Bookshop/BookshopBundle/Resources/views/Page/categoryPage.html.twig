@@ -11,15 +11,14 @@
                                     <span>/ </span>
                                 </li>
                                 <li class="category35">
-                                    <strong>{{ pagination[0].category.label }}</strong>
+                                    <strong>label</strong>
                                 </li>
                             </ul>
                         </div>
-
                         <div class="col-wrapper">
                             <div class="col-main">
                                 <div class="page-title category-title">
-                                    <h1>{{ pagination[0].category.label }}</h1>
+                                    <h1>label</h1>
                                 </div>
                            
                                 <div class="category-products">
@@ -28,43 +27,28 @@
                                             <p class="amount">
                                                 <strong>{{ pagination.getTotalItemCount }} Item(s)</strong>
                                             </p>
-
-                                            <div class="pages">
-                                                <strong>Page:</strong>
-                                                <ol>
-                                                    <li class="current">1</li>
-                                                    <li><a href="#">2</a></li>
-                                                    <li>
-                                                        <a class="next i-next" href="#" title="Next">
-                                                            <img src="images/pager_arrow_right.gif" alt="Next" class="v-middle" />
-                                                        </a>
-                                                    </li>
-                                                </ol>
-                                            </div>
-                                        </div>
-
-
-                                         
+                                          {{ knp_pagination_render(pagination) }}                                     
+                                        </div>                                        
                                         <div class="sorter">
                                             <div class="sort-by">
-                                                <form>
+                                                <form method="get">
                                                     <label>Sort By</label>
-                                                    <select>
-                                                        <option value="">Name</option>
-                                                        <option value="">Price</option>
-                                                    </select>
+                                                   <select name='sortBy'>
+                                                     <option {% if pagination.isSorted('title') %} selected="selected" {% endif %}>{{ knp_pagination_sortable(pagination, 'title', 'title') }}</option>
+                                                     <option {% if pagination.isSorted('price') %} selected="selected" {% endif %}>{{ knp_pagination_sortable(pagination, 'price', 'price') }}</option>
+                                                   </select>
                                                     &nbsp;
                                                     <label>Direction</label>
-                                                    <select>
-                                                        <option value="">Asc</option>
-                                                        <option value="">Desc</option>
+                                                    <select name='direction'>
+                                                       <option {% if pagination.isSorted('desc') %} selected="selected" {% endif %}>{{ knp_pagination_sortable(pagination, 'desc', 'desc') }}</option>
+                                                       <option {% if pagination.isSorted('asc') %} selected="selected" {% endif %}>{{ knp_pagination_sortable(pagination, 'asc', 'asc') }}</option>
+                                                    
                                                     </select>
-                                                    <input type="submit" name="submit" value="Go!" />
-                                                </form>
+                                                    <input type="submit" />
+                                                 </form>
                                             </div>
                                         </div>
-                                    </div>
-                                  
+                                    </div>                                 
                                    <ul class="products-grid">
                                    {% for product in pagination %}                                  
                                       {% if  (loop.index%3==1) %}   
@@ -140,39 +124,24 @@
                                             <div class="pager">
                                                 {{ knp_pagination_render(pagination) }}
                                                 <p class="amount">
-                                                    <strong>2 Item(s)</strong>
-                                                </p>
-
-                                                <div class="pages">
-                                                    <strong>Page:</strong>
-                                                    <ol>
-                                                        <li class="current">1</li>
-                                                        <li><a href="#">2</a></li>
-                                                        <li>
-                                                            <a class="next i-next" href="#" title="Next">
-                                                                <img src="images/pager_arrow_right.gif" alt="Next" class="v-middle" />
-                                                            </a>
-                                                        </li>
-                                                    </ol>
-                                                </div>
-                                            </div>
-
+                                                    <strong>{{ pagination.getTotalItemCount }} Item(s)</strong>
+                                                </p>                                            
                                             <div class="sorter">
                                                 <div class="sort-by">
-                                                    <form>
+                                                   <form method="get">
                                                     <label>Sort By</label>
-                                                    <select>
-                                                        <option value="">Name</option>
-                                                        <option value="">Price</option>
-                                                    </select>
+                                                   <select name='sortBy'>
+                                                     <option {% if pagination.isSorted('title') %} selected="selected" {% endif %}>{{ knp_pagination_sortable(pagination, 'title', 'title') }}</option>
+                                                     <option {% if pagination.isSorted('price') %} selected="selected" {% endif %}>{{ knp_pagination_sortable(pagination, 'price', 'price') }}</option>
+                                                   </select>
                                                     &nbsp;
                                                     <label>Direction</label>
-                                                    <select>
-                                                        <option value="">Asc</option>
-                                                        <option value="">Desc</option>
+                                                    <select name='direction'>
+                                                       <option {% if pagination.isSorted('desc') %} selected="selected" {% endif %}>{{ knp_pagination_sortable(pagination, 'desc', 'desc') }}</option>
+                                                       <option {% if pagination.isSorted('asc') %} selected="selected" {% endif %}>{{ knp_pagination_sortable(pagination, 'asc', 'asc') }}</option>
                                                     </select>
-                                                    <input type="submit" name="submit" value="Go!" />
-                                                </form>
+                                                    <input type="submit" />
+                                                 </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -180,8 +149,7 @@
                                          
                                 </div>
                             </div>
-                                 {% block leftsidebar%}{% endblock %}
-                         
+                                 {% block leftsidebar%}{% endblock %}                        
                         </div>
                        {% block rightsidebar%}{% endblock %}
                     </div>
