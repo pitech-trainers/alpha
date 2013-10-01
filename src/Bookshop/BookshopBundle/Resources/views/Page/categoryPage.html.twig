@@ -7,11 +7,11 @@
                         <div class="breadcrumbs">
                             <ul>
                                 <li class="home">
-                                    <a href="" title="Go to Home Page">Home</a>
+                                    <a href="{{ path('bookshop_bookshop_homepage') }}" title="Go to Home Page">Home</a>
                                     <span>/ </span>
                                 </li>
                                 <li class="category35">
-                                    <strong>Music</strong>
+                                    <strong>{{ pagination[0].category.label }}</strong>
                                 </li>
                             </ul>
                         </div>
@@ -19,14 +19,14 @@
                         <div class="col-wrapper">
                             <div class="col-main">
                                 <div class="page-title category-title">
-                                    <h1>Music</h1>
+                                    <h1>{{ pagination[0].category.label }}</h1>
                                 </div>
-{% if (products|length >0 ) %}
+                           
                                 <div class="category-products">
                                     <div class="toolbar">
                                         <div class="pager">
                                             <p class="amount">
-                                                <strong>2 Item(s)</strong>
+                                                <strong>{{ pagination.getTotalItemCount }} Item(s)</strong>
                                             </p>
 
                                             <div class="pages">
@@ -64,12 +64,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                        {% endif %}
-<ul class="products-grid">
-                    {% for product in products %}
-                                   
-                                        {% if  (loop.index%3==1) %}
-                                         
+                                  
+                                   <ul class="products-grid">
+                                   {% for product in pagination %}                                  
+                                      {% if  (loop.index%3==1) %}   
                                         <li class="item first">
                                             <a href="" title="{{ product.title }}" class="product-image"><img src="{{ asset('bundles/bookshopbookshop/product_images/'~product.image.path~product.image.filename) }}" width="135" height="135" alt="Nusantara Demo" /></a>
                                             <h2 class="product-name"><a href="" title="{{ product.Title }}">{{ product.Title }}</a></h2>
@@ -86,10 +84,10 @@
                                             </div>
                                         </li>
                                          {% endif %}
-                                 {% if  (loop.index%3==2) %}
+                                         {% if  (loop.index%3==2) %}
                                         <li class="item">
                                             <a href="product_detail.html" title="{{ product.Title }}" class="product-image">
-                                                <img src="images/cover.jpg" width="135" height="135" alt="{{ product.Title }}" />
+                                                <img src="{{ asset('bundles/bookshopbookshop/product_images/'~product.image.path~product.image.filename) }}" width="135" height="135" alt="{{ product.Title }}" />
                                             </a>
 
                                             <h2 class="product-name">
@@ -109,19 +107,19 @@
                                             </div>
                                         </li>
                                         {% endif %}
-                     {% if  (loop.index%3==0) %}
+                                        {% if  (loop.index%3==0) %}
                                         <li class="item">
-                                            <a href="product_detail.html" title=" Shaimus - Turn The Other Way" class="product-image">
-                                                <img src="images/cover.jpg" width="135" height="135" alt=" Shaimus - Turn The Other Way" />
+                                            <a href="product_detail.html" title=" {{ product.Title }}" class="product-image">
+                                                <img src="{{ asset('bundles/bookshopbookshop/product_images/'~product.image.path~product.image.filename) }}" width="135" height="135" alt=" Shaimus - Turn The Other Way" />
                                             </a>
 
                                             <h2 class="product-name">
-                                                <a href="product_detail.html" title=" Shaimus - Turn The Other Way"> Shaimus - Turn The Other Way</a>
+                                                <a href="product_detail.html" title="{{ product.Title }}"> {{ product.Title }}</a>
                                             </h2>
 
                                             <div class="price-box">
                                                 <span class="regular-price" id="product-price-170">
-                                                    <span class="price">1,99 US$</span>
+                                                    <span class="price">{{ product.Price }} US$</span>
                                                 </span>
                                             </div>
 
@@ -130,18 +128,17 @@
                                                     <span><span>Add to Cart</span></span>
                                                 </button>
                                             </div>
-                                        </li>
-                                  
-                                         {% endif %}
-                                         
-      {% else %}
+                                        </li>                                
+                                         {% endif %}                                     
+                            {% else %}
                                 <p>There are no products...</p>
                             {% endfor %}	
                                 </ul> 
-                                        {% if (products|length >0 ) %}
+                                    
                                     <div class="toolbar-bottom">
                                         <div class="toolbar">
                                             <div class="pager">
+                                                {{ knp_pagination_render(pagination) }}
                                                 <p class="amount">
                                                     <strong>2 Item(s)</strong>
                                                 </p>
@@ -180,7 +177,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                         {% endif %}
+                                         
                                 </div>
                             </div>
                                  {% block leftsidebar%}{% endblock %}
