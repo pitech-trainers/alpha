@@ -1,7 +1,9 @@
 <?php
+
 namespace Bookshop\BookshopBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="Bookshop\BookshopBundle\Entity\Repository\ProductRepository")
@@ -9,73 +11,79 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Product
 {
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-    
-     
-      /**
+
+    /**
      * @ORM\OneToOne(targetEntity="Image")
-     * @ORM\JoinColumn(name="imageId", referencedColumnName="id")
+     * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
      */
     protected $image;
-    
-     /**
+
+    /**
      * @ORM\Column(type="string")
      */
     protected $title;
-    
-     /**
+
+    /**
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="products")
-     * @ORM\JoinColumn(name="categoryId", referencedColumnName="id")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
     protected $category;
-    
-     /**
+
+    /**
      * @ORM\Column(type="decimal")
      */
     protected $price;
-    
-      /**
-     * @ORM\ManyToOne(targetEntity="Author")
-     * @ORM\JoinColumn(name="authorId", referencedColumnName="id")
- */
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Author", inversedBy="products")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id")    
+     * */
     protected $authors;
-    
-     /**
+
+    /**
      * @ORM\Column(type="string")
      */
     protected $isbn;
-    
-     /**
-     * @ORM\Column(type="string")
+
+    /**
+     * @ORM\Column(type="string", name="appereance_year")
      */
     protected $appereanceYear;
-    
-     /**
+
+    /**
      * @ORM\Column(type="string")
      */
     protected $description;
-    
-     /**
-     * @ORM\Column(type="string")
+
+    /**
+     * @ORM\Column(type="string" , name="short_description")
      */
     protected $shortDescription;
-    
-     /**
+
+    /**
      * @ORM\Column(type="integer")
      */
     protected $stock;
-    
-     /**
+
+    /**
      * @ORM\Column(type="boolean")
      */
     protected $active;
 
-
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->authors = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -96,7 +104,7 @@ class Product
     public function setTitle($title)
     {
         $this->title = $title;
-    
+
         return $this;
     }
 
@@ -119,7 +127,7 @@ class Product
     public function setPrice($price)
     {
         $this->price = $price;
-    
+
         return $this;
     }
 
@@ -142,7 +150,7 @@ class Product
     public function setIsbn($isbn)
     {
         $this->isbn = $isbn;
-    
+
         return $this;
     }
 
@@ -165,7 +173,7 @@ class Product
     public function setAppereanceYear($appereanceYear)
     {
         $this->appereanceYear = $appereanceYear;
-    
+
         return $this;
     }
 
@@ -188,7 +196,7 @@ class Product
     public function setDescription($description)
     {
         $this->description = $description;
-    
+
         return $this;
     }
 
@@ -211,7 +219,7 @@ class Product
     public function setShortDescription($shortDescription)
     {
         $this->shortDescription = $shortDescription;
-    
+
         return $this;
     }
 
@@ -234,7 +242,7 @@ class Product
     public function setStock($stock)
     {
         $this->stock = $stock;
-    
+
         return $this;
     }
 
@@ -257,7 +265,7 @@ class Product
     public function setActive($active)
     {
         $this->active = $active;
-    
+
         return $this;
     }
 
@@ -280,7 +288,7 @@ class Product
     public function setImage(\Bookshop\BookshopBundle\Entity\Image $image = null)
     {
         $this->image = $image;
-    
+
         return $this;
     }
 
@@ -303,7 +311,7 @@ class Product
     public function setCategory(\Bookshop\BookshopBundle\Entity\Category $category = null)
     {
         $this->category = $category;
-    
+
         return $this;
     }
 
@@ -318,25 +326,36 @@ class Product
     }
 
     /**
-     * Set authors
+     * Add authors
      *
      * @param \Bookshop\BookshopBundle\Entity\Author $authors
      * @return Product
      */
-    public function setAuthors(\Bookshop\BookshopBundle\Entity\Author $authors = null)
+    public function addAuthor(\Bookshop\BookshopBundle\Entity\Author $authors)
     {
-        $this->authors = $authors;
-    
+        $this->authors[] = $authors;
+
         return $this;
+    }
+
+    /**
+     * Remove authors
+     *
+     * @param \Bookshop\BookshopBundle\Entity\Author $authors
+     */
+    public function removeAuthor(\Bookshop\BookshopBundle\Entity\Author $authors)
+    {
+        $this->authors->removeElement($authors);
     }
 
     /**
      * Get authors
      *
-     * @return \Bookshop\BookshopBundle\Entity\Author 
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getAuthors()
     {
         return $this->authors;
     }
+
 }

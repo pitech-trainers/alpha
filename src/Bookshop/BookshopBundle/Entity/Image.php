@@ -1,4 +1,5 @@
 <?php
+
 namespace Bookshop\BookshopBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -7,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="images")
  */
-class Image
+class Image 
 {
     /**
      * @ORM\Id
@@ -15,13 +16,13 @@ class Image
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
- 
+
     /**
      * @ORM\Column(type="string")
      */
     protected $path;
-    
-        /**
+
+    /**
      * @ORM\Column(type="string")
      */
     protected $filename;
