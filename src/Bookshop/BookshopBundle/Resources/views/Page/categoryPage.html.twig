@@ -181,7 +181,13 @@
                                              {% endif %}                                                                                                                              
                                             </ol>
                                         </div>
-                                        <div class="actions"><a href="{{ path('bookshop_bookshop_category',{'cid':pagination.params.cid })}}">Clear All</a></div>
+                                        <div class="actions">
+                                            {% if (app.request.query.has('sortBy')) %}
+                                            <a href="{{ path('bookshop_bookshop_category',{'cid':pagination.params.cid ,'sortBy':app.request.query.get('sortBy'),'direction':app.request.query.get('direction')})}}">Clear All</a>
+                                            {% else %}
+                                            <a href="{{ path('bookshop_bookshop_category',{'cid':pagination.params.cid })}}">Clear All</a>
+                                            {% endif %}
+                                        </div>
                                         <p class="block-subtitle">Shopping Options</p>
                                         <dl id="narrow-by-list">                                                                                                                       
                                             <dt>Price</dt>
