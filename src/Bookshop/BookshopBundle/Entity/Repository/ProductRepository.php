@@ -12,19 +12,58 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProductRepository extends EntityRepository
 {
-    
-  public function getLatestProducts($limit = null)
-  {
-    $qb = $this->createQueryBuilder('p')
-               ->select('p')
-//               ->leftJoin('p.comments', 'c')
-               ->addOrderBy('p.id', 'DESC');
 
-    if (false === is_null($limit))
-        $qb->setMaxResults($limit);
+    public function getLatestProducts($limit = null)
+    {
+        $qb = $this->createQueryBuilder('p')
+                ->select('p')
+                ->addOrderBy('p.id', 'DESC');
 
-    return $qb->getQuery()
-              ->getResult();
-  }
+        if (false === is_null($limit))
+            $qb->setMaxResults($limit);
+
+        return $qb->getQuery()
+                        ->getResult();
+    }
+
+    public function getFilteredProducts($cid, $price = null, $stock = null, $sortBy = null, $direction = null)
+    {
+        $qb = $this->createQueryBuilder('p')
+                ->select('p')
+                ->where('p.category=' . $cid);
+
+        if (!is_null($price)) {
+            switch ($price) {
+                case 1:
+                    $qb->andWhere("p.price <50");
+                    break;
+                case 2:
+                    $qb->andWhere("p.price >=50 and p.price<100");
+                    break;
+                case 3:
+                    $qb->andWhere("p.price >=100");
+                    break;
+            }
+        }
+
+        if (!is_null($stock)) {
+            switch ($stock) {
+                case 0:
+                    $qb->andWhere("p.stock =0");
+                    break;
+                case 1:
+                    $qb->andWhere("p.stock >0");
+                    break;
+            }
+        }
+
+        if (!is_null($sortBy)) {
+            $qb->addOrderBy("p." . $sortBy, $direction);
+        }
+
+
+        return $qb->getQuery()
+                        ->getResult();
+    }
 
 }
