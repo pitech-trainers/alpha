@@ -47,7 +47,7 @@ class PageController extends Controller
         $label='Search result for '.$request->query->get('search');
         }
         
-        return $this->render('BookshopBookshopBundle:Page:categoryPage.html.twig', array(
+        return $this->render('BookshopBookshopBundle:Page:productList.html.twig', array(
                 'pagination' => $pagination , 'label' => $label ,'categories' => $categories
 
         ));

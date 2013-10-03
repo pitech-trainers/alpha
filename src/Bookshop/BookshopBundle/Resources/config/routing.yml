@@ -5,7 +5,7 @@ bookshop_bookshop_homepage:
 bookshop_bookshop_category:
     pattern:  /category
     defaults: { _controller: BookshopBookshopBundle:Page:productList }
-    requirements:
+    requirements: 
        _method:  GET
        id: \d+
        
