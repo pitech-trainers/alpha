@@ -45,6 +45,8 @@
                                                     </select>
                                                     {% if (app.request.query.has('price')) %} <input type="hidden" value="{{ app.request.get('price')}}" name="price"> {% endif %}
                                                     {% if (app.request.query.has('stock')) %} <input type="hidden" value="{{ app.request.get('stock')}}" name="stock"> {% endif %}
+                                                    {% if (app.request.query.has('cid')) %} <input type="hidden" value="{{ app.request.get('cid')}}" name="cid"> {% endif %}
+                                                    {% if (app.request.query.has('label')) %} <input type="hidden" value="{{ app.request.get('label')}}" name="label"> {% endif %}
                                                     <input type="submit" />
                                                  </form>
                                             </div>
@@ -137,6 +139,8 @@
                                                     </select>
                                                     {% if (app.request.query.has('price')) %} <input type="hidden" value="{{ app.request.get('price')}}" name="price"> {% endif %}
                                                     {% if (app.request.query.has('stock')) %} <input type="hidden" value="{{ app.request.get('stock')}}" name="stock"> {% endif %}
+                                                    {% if (app.request.query.has('cid')) %} <input type="hidden" value="{{ app.request.get('cid')}}" name="cid"> {% endif %}
+                                                    {% if (app.request.query.has('label')) %} <input type="hidden" value="{{ app.request.get('label')}}" name="label"> {% endif %}
                                                     <input type="submit" />
                                                  </form>
                                                 </div>
@@ -157,6 +161,16 @@
                                         <div class="currently">
                                             <p class="block-subtitle">Currently Shopping by:</p>
                                             <ol>
+                                             {% if (app.request.query.has('cid')) %}
+                                              <li>
+                                                    <span class="label">Category:</span>
+                                                    {%for category in categories%}
+                                                      {% if app.request.query.get('cid') == category.id %}    
+                                                        <span class="value">{{category.label}}</span>
+                                                      {% endif %}
+                                                    {% endfor%}
+                                              </li>
+                                             {%endif%}
                                              {% if (app.request.query.has('price')) %}
                                              <li>
                                                     <span class="label">Price:</span>
@@ -182,26 +196,50 @@
                                             </ol>
                                         </div>
                                         <div class="actions">
+                                            
+                                         {% if (app.request.attributes.get('_route' )== 'bookshop_bookshop_category')%} 
                                             {% if (app.request.query.has('sortBy')) %}
-                                            <a href="{{ path('bookshop_bookshop_category',{'cid':pagination.params.cid ,'sortBy':app.request.query.get('sortBy'),'direction':app.request.query.get('direction')})}}">Clear All</a>
+                                              <a href="{{ path('bookshop_bookshop_category',{'sortBy':app.request.query.get('sortBy'),'direction':app.request.query.get('direction')})}}">Clear All</a>
                                             {% else %}
-                                            <a href="{{ path('bookshop_bookshop_category',{'cid':pagination.params.cid })}}">Clear All</a>
+                                               <a href="{{ path('bookshop_bookshop_category',{'cid':pagination.params.cid,'label':pagination.params.label })}}">Clear All</a>
                                             {% endif %}
+                                         {% endif %}
+                                               
+                                         {% if (app.request.attributes.get('_route' )== 'bookshop_bookshop_search')%} 
+                                          {% if (app.request.query.has('sortBy')) %}
+                                             <a href="{{ path('bookshop_bookshop_search',{'sortBy':app.request.query.get('sortBy'),'direction':app.request.query.get('direction')})}}">Clear All</a>
+                                            {% else %}
+                                             <a href="{{ path('bookshop_bookshop_search')}}">Clear All</a>
+                                          {% endif %} 
+                                         {% endif %}
                                         </div>
                                         <p class="block-subtitle">Shopping Options</p>
-                                        <dl id="narrow-by-list">                                                                                                                       
+                                        <dl id="narrow-by-list">
+                                            {% if (app.request.attributes.get('_route' )== 'bookshop_bookshop_search')%}
+                                            <dt>Category</dt>
+                                            <dd>
+                                                <ol>
+                                                    {% for category in categories %}
+                                                    <li><a href="{{ path(app.request.attributes.get('_route' ),app.request.query.all|merge({'cid':category.id})) }}">
+                                                        {{category.label}}                                                        
+                                                        </a>
+                                                    </li>  
+                                                    {% endfor %}
+                                                </ol>
+                                            </dd>
+                                            {% endif %}
                                             <dt>Price</dt>
                                             <dd>
                                                 <ol>                                                                                                 
-                                                    <li><a href="{{ path(app.request.attributes.get('_route' ),app.request.query.all|merge({'cid':pagination.params.cid,'price':'1'})) }}">
+                                                    <li><a href="{{ path(app.request.attributes.get('_route' ),app.request.query.all|merge({'price':'1'})) }}">
                                                             <span class="price">0,00 US$</span> - <span class="price">49,99 US$</span>
                                                         </a>                                                          
                                                     </li>
-                                                    <li><a href="{{ path(app.request.attributes.get('_route' ),app.request.query.all|merge({'cid':pagination.params.cid,'price':'2'})) }}">
+                                                    <li><a href="{{ path(app.request.attributes.get('_route' ),app.request.query.all|merge({'price':'2'})) }}">
                                                             <span class="price">50,00 US$</span> - <span class="price">99,99 US$</span>
                                                         </a>
                                                     </li>
-                                                    <li><a href="{{ path(app.request.attributes.get('_route' ),app.request.query.all|merge({'cid':pagination.params.cid,'price':'3'})) }}">
+                                                    <li><a href="{{ path(app.request.attributes.get('_route' ),app.request.query.all|merge({'price':'3'})) }}">
                                                             <span class="price">100,00 US$</span> and above
                                                         </a>
                                                     </li>                                                                                                   
@@ -210,12 +248,12 @@
                                             <dt>Stock</dt>
                                             <dd>
                                                 <ol>
-                                                    <li><a href="{{ path(app.request.attributes.get('_route' ),app.request.query.all|merge({'cid':pagination.params.cid,'stock':'1'})) }}">
+                                                    <li><a href="{{ path(app.request.attributes.get('_route' ),app.request.query.all|merge({'stock':'1'})) }}">
                                                         Available
                                                         
                                                         </a>
                                                     </li>
-                                                    <li><a href="{{ path(app.request.attributes.get('_route' ),app.request.query.all|merge({'cid':pagination.params.cid,'stock':'0'})) }}">                                                           
+                                                    <li><a href="{{ path(app.request.attributes.get('_route' ),app.request.query.all|merge({'stock':'0'})) }}">                                                           
                                                         Soon
                                                         </a>
                                                     </li>

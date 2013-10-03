@@ -26,11 +26,15 @@ class ProductRepository extends EntityRepository
                         ->getResult();
     }
 
-    public function getFilteredProducts($cid, $price = null, $stock = null, $sortBy = null, $direction = null)
+    public function getFilteredProducts($cid = null, $price = null, $stock = null, $sortBy = null, $direction = null, $search = null)
     {
         $qb = $this->createQueryBuilder('p')
-                ->select('p')
-                ->where('p.category=' . $cid);
+                ->select('p');
+        if (!is_null($cid)) {
+            $qb->where('p.category=' . $cid);
+        } else {
+            $qb->where('1=1');
+        }
 
         if (!is_null($price)) {
             switch ($price) {
@@ -44,6 +48,10 @@ class ProductRepository extends EntityRepository
                     $qb->andWhere("p.price >=100");
                     break;
             }
+        }
+
+        if (!is_null($search)) {
+            $qb->andwhere('p.title LIKE ?1')->setParameter(1, '%' . $search . '%');
         }
 
         if (!is_null($stock)) {

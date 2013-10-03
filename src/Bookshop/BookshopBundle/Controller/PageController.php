@@ -3,7 +3,6 @@
 namespace Bookshop\BookshopBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 
 class PageController extends Controller
 {
@@ -20,30 +19,36 @@ class PageController extends Controller
         ));
     }
     
-    public function categoryPageAction($cid)
+    public function productListAction()
     {      
-        $request = Request::createFromGlobals();             
+        $request = $this->get('request');  
+        
         $em = $this->getDoctrine()
                    ->getManager();
         $products = $em->getRepository('BookshopBookshopBundle:Product')->getFilteredProducts(
-                                                                                    $cid,
+                                                                                    $request->query->get('cid'),
                                                                                     $request->query->get('price'),
                                                                                     $request->query->get('stock'),
                                                                                     $request->query->get('sortBy'),
-                                                                                    $request->query->get('direction')
-                                                                                              );        
+                                                                                    $request->query->get('direction'),
+                                                                                    $request->query->get('search')
+                                                                                              );     
+        $categories = $em->getRepository('BookshopBookshopBundle:Category')->findAll();        
         $paginator = $this->get('knp_paginator');
-
         $pagination = $paginator->paginate(
                             $products,
                             $this->get('request')->query->get('page', 1)/*page number*/,
                             3/*limit per page*/
                                   );
-        
-        $label=$em->getRepository('BookshopBookshopBundle:Category')->find($cid)->getLabel();
+        if (!is_null($request->query->get('label'))){
+          $label=$request->query->get('label');
+        }
+        else {
+        $label='Search result for '.$request->query->get('search');
+        }
         
         return $this->render('BookshopBookshopBundle:Page:categoryPage.html.twig', array(
-                'pagination' => $pagination , 'label' => $label
+                'pagination' => $pagination , 'label' => $label ,'categories' => $categories
 
         ));
     }

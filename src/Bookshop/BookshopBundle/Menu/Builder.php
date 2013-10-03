@@ -43,7 +43,7 @@ class Builder extends ContainerAware
             $menu->addChild($category->getLabel(), 
                     array(
                         'route' => 'bookshop_bookshop_category',
-                        'routeParameters' => array('cid' => $category->getId())
+                        'routeParameters' => array('cid' => $category->getId(),'label' => $category->getLabel())
                         ));
         }
         

@@ -3,8 +3,15 @@ bookshop_bookshop_homepage:
     defaults: { _controller: BookshopBookshopBundle:Page:index }
     
 bookshop_bookshop_category:
-    pattern:  /cid={cid}
-    defaults: { _controller: BookshopBookshopBundle:Page:categoryPage }
+    pattern:  /category
+    defaults: { _controller: BookshopBookshopBundle:Page:productList }
+    requirements:
+       _method:  GET
+       id: \d+
+       
+bookshop_bookshop_search:
+    pattern:  /search
+    defaults: { _controller: BookshopBookshopBundle:Page:productList }
     requirements:
        _method:  GET
        id: \d+

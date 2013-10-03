@@ -1,8 +1,10 @@
 parameters:
 #    bookshop_bookshop.example.class: Bookshop\BookshopBundle\Example
+     request.class: Symfony\Component\HttpFoundation\Request
 
 services:
 #    bookshop_bookshop.example:
 #        class: %bookshop_bookshop.example.class%
 #        arguments: [@service_id, "plain_value", %parameter%]
-
+    request:
+       class: %request.class%
