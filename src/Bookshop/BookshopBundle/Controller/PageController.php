@@ -46,11 +46,19 @@ class PageController extends Controller
         else {
         $label='Search result for '.$request->query->get('search');
         }
-        
         return $this->render('BookshopBookshopBundle:Page:productList.html.twig', array(
                 'pagination' => $pagination , 'label' => $label ,'categories' => $categories
 
         ));
     }
-    
+    public function productDetailAction($pid)
+    {
+       $em = $this->getDoctrine()
+                   ->getManager();
+       $product = $em->getRepository('BookshopBookshopBundle:Product')->find($pid);
+       $id = $product->getCategory()->getId();
+       $random = $em->getRepository('BookshopBookshopBundle:Product')->getRandomFour($id);
+
+        return $this->render('BookshopBookshopBundle:Page:productDetail.html.twig',array('product' => $product, 'random' => $random));  
+    }
 }

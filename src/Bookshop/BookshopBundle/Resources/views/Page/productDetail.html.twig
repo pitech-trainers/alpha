@@ -1,0 +1,93 @@
+{% extends 'BookshopBookshopBundle::layout.html.twig' %}
+
+{% block content%}
+
+<div class="main-container col2-right-layout">
+                    <div class="main">
+                        <div class="breadcrumbs">
+                            <ul>
+                                <li class="home">
+                                    <a href="/homepage/" title="Go to Home Page">Home</a>
+                                    <span>/ </span>
+                                </li>
+                                <li class="category10">
+                                    <a href="{{ path('bookshop_bookshop_category',{'cid':product.category.id,'label':product.category.label})}}" title="">{{ product.category.label }}</a>
+                                    <span>/ </span>
+                                </li>
+                                <li class="product">
+                                    <strong>{{ product.title }}</strong>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-main">
+                            <div class="product-view">
+                                <div class="product-essential">
+                                    <form action="" method="" id="product_addtocart_form">
+                                        <div class="product-shop">
+                                            <div class="product-name">
+                                                <h1>{{ product.title }}</h1>
+                                            </div>
+                                            <div class="short-description">
+                                                <h2>Quick Overview</h2>
+                                                <div class="std">{{ product.shortDescription }}</div>
+                                            </div>
+                                            <p class="availability in-stock">Availability: <span>In stock</span></p>
+                                            <div class="price-box">
+                                                <span class="regular-price" id="product-price-MyProductID">
+                                                    <span class="price">{{ product.price }} US$</span>
+                                                </span>
+                                            </div>
+                                            <div class="add-to-box">
+                                                <div class="add-to-cart">                                                  
+                                                        <label for="qty">Qty:</label>
+                                                    <input type="text" name="qty" id="qty" maxlength="12" value="1" title="Qty" class="input-text qty" />
+                                                     <input type="hidden"  name="id" value="{{ product.id }}">
+                                                      <button type="submit" title="Add to Cart" class="button btn-cart"  >
+                                                    <span><span>Add to Cart</span></span>
+                                                </button>                                               
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="product-img-box">
+                                            <p class="product-image product-image-zoom">
+                                                <img id="image" src="{{ asset('bundles/bookshopbookshop/product_images/'~product.image.path~product.image.filename) }}" alt="{{ product.title }}" title="{{ product.title }}" />
+                                            </p>
+                                        </div>
+                                        <div class="clearer"></div>
+                                    </form>
+                                </div>
+                                <div class="product-collateral">
+                                    <div class="box-collateral box-description">
+                                        <h2>Details</h2>
+                                        <div class="std">
+                                           {{ product.Description }}
+                                        </div>
+                                    </div>
+                                    <p><a href=""><span>&laquo;Back to list</span></a></p>
+                                    <div class="box-collateral box-up-sell">
+                                        <h2>You may also be interested in the following product(s)</h2>
+                                        <table class="products-grid" id="upsell-product-table">
+                                            <tr>
+                                              {% for rprod in random %}
+                                                <td>
+                                                    <a href="{{ path('bookshop_bookshop_productDetail',{'pid':rprod.id})}}" title="{{ rprod.title }}" class="product-image"><img src="{{ asset('bundles/bookshopbookshop/product_images/'~rprod.image.path~rprod.image.filename) }}" width="125" height="125" alt="{{ rprod.title }}" /></a>
+                                                    <h3 class="product-name"><a href="{{ path('bookshop_bookshop_productDetail',{'pid':rprod.id})}}" title="{{ rprod.title }}">{{ rprod.title }}</a></h3>
+                                                    <div class="price-box">
+                                                        <p class="minimal-price">
+                                                            <span class="price-label">Starting at:</span>
+                                                            <span class="price" id="product-minimal-price-54-upsell">{{ rprod.price }} US$</span>
+                                                        </p>
+                                                    </div>
+                                                </td>                      
+                                                {% endfor %}
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% block rightsidebar %}
+                        {% endblock %}
+                    </div>
+                </div>
+{% endblock %}
