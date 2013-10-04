@@ -15,10 +15,12 @@ class Cart
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-       /**
-     * @ORM\Column(type="integer")
-     */
-    protected $user_id;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="cart", cascade={"persist"})
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     **/
+    protected $user;
        /**
      * @ORM\Column(type="integer")
      */
@@ -32,9 +34,12 @@ class Cart
      * @ORM\Column(type="integer")
      */
     protected $total;
-    
-    protected $products;
-
+ 
+ 
+   /**
+     * @ORM\OneToMany(targetEntity="CartItem", mappedBy="cart", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    protected $cart_items;
     
     
 
@@ -56,7 +61,7 @@ class Cart
      */
     public function setUserId($userId)
     {
-        $this->user_id = $userId;
+        $this->user = $userId;
     
         return $this;
     }
@@ -138,5 +143,68 @@ class Cart
     public function getTotal()
     {
         return $this->total;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->cart_items = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add cart_items
+     *
+     * @param \Bookshop\BookshopBundle\Entity\CartItem $cartItems
+     * @return Cart
+     */
+    public function addCartItem(\Bookshop\BookshopBundle\Entity\CartItem $cartItems)
+    {
+        $this->cart_items[] = $cartItems;
+    
+        return $this;
+    }
+
+    /**
+     * Remove cart_items
+     *
+     * @param \Bookshop\BookshopBundle\Entity\CartItem $cartItems
+     */
+    public function removeCartItem(\Bookshop\BookshopBundle\Entity\CartItem $cartItems)
+    {
+        $this->cart_items->removeElement($cartItems);
+    }
+
+    /**
+     * Get cart_items
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCartItems()
+    {
+        return $this->cart_items;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Bookshop\BookshopBundle\Entity\User $user
+     * @return Cart
+     */
+    public function setUser(\Bookshop\BookshopBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+    
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Bookshop\BookshopBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

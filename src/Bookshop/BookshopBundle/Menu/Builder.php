@@ -37,10 +37,14 @@ class Builder extends ContainerAware
 
         $categories = $em->getRepository('BookshopBookshopBundle:Category')
                     ->findAll();
-        
+       
         foreach ($categories as $category)
         {
-            $menu->addChild($category->getLabel(), array('route' => 'bookshop_bookshop_homepage'));
+            $menu->addChild($category->getLabel(), 
+                    array(
+                        'route' => 'bookshop_bookshop_category',
+                        'routeParameters' => array('cid' => $category->getId())
+                        ));
         }
         
         return $menu;

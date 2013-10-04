@@ -6,7 +6,7 @@ use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Bookshop\BookshopBundle\Entity\Repository\UserRepository")
  * @ORM\Table(name="fos_user")
  */
 class User extends BaseUser {
@@ -42,14 +42,12 @@ class User extends BaseUser {
      */
     protected $mobile;
 
-       /**
-     * @ORM\Column(type="integer")
- 
-     * 
-     */
+    
+      
     protected $cart;
     public function __construct() {
         parent::__construct();
+       
         // your ow
     }
 
@@ -147,5 +145,51 @@ class User extends BaseUser {
     public function getGender()
     {
         return $this->gender;
+    }
+
+    /**
+     * Set cart
+     *
+     * @param integer $cart
+     * @return User
+     */
+    public function setCart($cart)
+    {
+        $this->cart = $cart;
+    
+        return $this;
+    }
+
+    /**
+     * Get cart
+     *
+     * @return integer 
+     */
+    public function getCart()
+    {
+        return $this->cart;
+    }
+
+    /**
+     * Add cart
+     *
+     * @param \Bookshop\BookshopBundle\Entity\Cart $cart
+     * @return User
+     */
+    public function addCart(\Bookshop\BookshopBundle\Entity\Cart $cart)
+    {
+        $this->cart[] = $cart;
+    
+        return $this;
+    }
+
+    /**
+     * Remove cart
+     *
+     * @param \Bookshop\BookshopBundle\Entity\Cart $cart
+     */
+    public function removeCart(\Bookshop\BookshopBundle\Entity\Cart $cart)
+    {
+        $this->cart->removeElement($cart);
     }
 }

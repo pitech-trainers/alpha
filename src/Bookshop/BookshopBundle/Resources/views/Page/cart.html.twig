@@ -1,0 +1,138 @@
+  {% extends 'BookshopBookshopBundle::layout.html.twig' %}
+
+{% block container %}
+
+
+
+<div class="main-container col1-layout">
+    <div class="main">
+        <div class="col-main">
+            <div class="cart">
+                <div class="page-title title-buttons">
+                    <h1>Shopping Cart</h1>
+                    <ul class="checkout-types">
+                        <li>
+                            <button type="button" title="Proceed to Checkout" class="button btn-proceed-checkout btn-checkout" ><span><span>Proceed to Checkout</span></span></button>
+                        </li>
+                    </ul>
+                </div>
+              
+            
+                    <fieldset>
+                        <table id="shopping-cart-table" class="data-table cart-table">
+                            <colgroup>
+                                <col width="1" />
+                                <col />
+                                <col width="1" />
+                                <col width="1" />
+                                <col width="1" />
+                                <col width="1" />
+                                <col width="1" />
+                            </colgroup>
+                            <thead>
+                                <tr class="first last">
+                                    <th rowspan="1">&nbsp;</th>
+                                    <th rowspan="1"><span class="nobr">Product Name</span></th>
+                                    <th class="a-center" colspan="1"><span class="nobr">Unit Price</span></th>
+                                    <th rowspan="1" class="a-center">Qty</th>
+                                    <th class="a-center" colspan="1">Subtotal</th>
+                                    <th rowspan="1" class="a-center">&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                
+                                <tr class="first last">
+                                    <td colspan="50" class="a-right last">
+                                        
+                                        <button type="button" title="Continue Shopping" class="button btn-continue" ><span><span>Continue Shopping</span></span></button>
+                                        <button type="submit" name="update_cart_action" value="update_qty" title="Update Shopping Cart" class="button btn-update"><span><span>Update Shopping Cart</span></span></button>
+                                        <button type="submit" name="update_cart_action" value="empty_cart" title="Clear Shopping Cart" class="button btn-empty" id="empty_cart_button"><span><span>Clear Shopping Cart</span></span></button>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                {% for item in cart.getCartItems%}
+                            
+                                {% if  (loop.index%2!=0) %}
+                                    <tr class="first odd">
+                                 {% else %}
+                                        <tr class="last even">
+                                 {% endif %}
+                                            <td>
+                                                <a href="product_detail.html" title="{{ item.getTitle }}" class="product-image">
+                                                    <img src="images/media/red_highheels_3.jpg" alt="{{ item.getTitle }}" height="75" width="75" />
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <h2 class="product-name">
+                                                    <a href="product_detail.html">{{ item.getTitle }}</a>
+                                                </h2>
+                                          
+                                            </td>
+                                            <td class="a-right">
+                                                <span class="cart-price">
+                                                    <span class="price">${{ item.getPrice }}</span>
+                                                </span>
+                                            </td>
+                                            <td class="a-center">
+                                                <input name="quantity[{{ loop.index }}]" value="{{ item.getQuantity }}" size="4" title="Qty" class="input-text qty" maxlength="12" />
+                                            </td>
+                                            <td class="a-right">
+                                                <span class="cart-price">
+                                                    <span class="price">{{ item.getPrice * item.getQuantity }}</span>
+                                                </span>
+                                            </td>
+                                            <td class="a-center last">
+                                           
+                                                
+                                              <form action="{{ path('BookshopBookshopBundle_product_remove') }}" method="post">
+                                                  <input type='hidden' name='id' value= '{{item.getId}}'>
+                                              <button type='submit'><a href="" title="Remove item" class="btn-remove btn-remove2"> Remove Item </a></button>
+                                              </form>
+                                                
+                                            </td>
+                                            
+                                        </tr>
+                                       
+                                {% endfor %}
+                                    </tbody>
+                                </table>
+                            </fieldset>
+                      
+
+                        <div class="cart-collaterals">
+                            <div class="totals">
+                                <table id="shopping-cart-totals-table">
+                                    <colgroup>
+                                        <col />
+                                        <col width="1" />
+                                    </colgroup>
+                                    <tfoot>
+                                        <tr>
+                                            <td style="" class="a-right" colspan="1">
+                                                <strong>Grand Total</strong>
+                                            </td>
+                                            <td style="" class="a-right">
+                                                <strong><span class="price">$104.99</span></strong>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <tr>
+                                            <td style="" class="a-right" colspan="1">Subtotal</td>
+                                            <td style="" class="a-right"><span class="price">$104.99</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <ul class="checkout-types">
+                                    <li>
+                                        <button type="button" title="Proceed to Checkout" class="button btn-proceed-checkout btn-checkout" ><span><span>Proceed to Checkout</span></span></button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}
