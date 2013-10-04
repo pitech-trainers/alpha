@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new Bookshop\BookshopBundle\BookshopBookshopBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Hautelook\AliceBundle\HautelookAliceBundle()
         );
 
