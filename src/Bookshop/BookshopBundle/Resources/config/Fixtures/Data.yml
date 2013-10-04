@@ -1,0 +1,28 @@
+## YAML Template.
+---      
+Bookshop\BookshopBundle\Entity\Category:
+    category{1..10}:
+      label: <label()>
+
+Bookshop\BookshopBundle\Entity\Product:
+    product{1..10}:
+      title: <title()>
+      category: "@category*"
+      price: <price()>
+      isbn: <ISBN()>
+      appereance_year: <apperance_year()>
+      description: <description()>
+      short_description: <sdescription()>
+      stock: <stock()>
+      active: <active()>
+      
+Bookshop\BookshopBundle\Entity\Author:
+     author{1..10}:
+       author_name: <author()>
+       product (unique): "@product*" 
+         
+Bookshop\BookshopBundle\Entity\Image:
+     image{1..10}:
+       path: "/public/image/"
+       product (unique): "@product*"
+       filename (unique): <filename()>

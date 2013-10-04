@@ -1,5 +1,0 @@
-## YAML Template.
----
-Bookshop\BookshopBundle\Entity\Category:
-    category{1..10}:
-      label: <label()>   
