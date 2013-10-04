@@ -58,8 +58,8 @@
                                    {% for product in pagination %}                                  
                                       {% if  (loop.index%3==1) %}   
                                         <li class="item first">
-                                            <a href="" title="{{ product.title }}" class="product-image"><img src="{{ asset('bundles/bookshopbookshop/product_images/'~product.image.path~product.image.filename) }}" width="135" height="135" alt="Nusantara Demo" /></a>
-                                            <h2 class="product-name"><a href="" title="{{ product.Title }}">{{ product.Title }}</a></h2>
+                                            <a href="{{ path('bookshop_bookshop_productDetail',{'pid': product.id})}}" title="{{ product.title }}" class="product-image"><img src="{{ asset('bundles/bookshopbookshop/product_images/'~product.image.path~product.image.filename) }}" width="135" height="135" alt="Nusantara Demo" /></a>
+                                            <h2 class="product-name"><a href="{{ path('bookshop_bookshop_productDetail',{'pid': product.id})}}" title="{{ product.Title }}">{{ product.Title }}</a></h2>
                                             <div class="price-box">
                                                 <span class="regular-price" id="product-price-168">
                                                     <span class="price">{{ product.Price }} US$</span>
@@ -74,11 +74,11 @@
                                          {% endif %}
                                          {% if  (loop.index%3==2) %}
                                         <li class="item">
-                                            <a href="product_detail.html" title="{{ product.Title }}" class="product-image">
+                                            <a href="{{ path('bookshop_bookshop_productDetail',{'pid': product.id})}}" title="{{ product.Title }}" class="product-image">
                                                 <img src="{{ asset('bundles/bookshopbookshop/product_images/'~product.image.path~product.image.filename) }}" width="135" height="135" alt="{{ product.Title }}" />
                                             </a>
                                             <h2 class="product-name">
-                                                <a href="product_detail.html" title="{{ product.Title }}"> {{ product.Title }}</a>
+                                                <a href="{{ path('bookshop_bookshop_productDetail',{'pid': product.id})}}" title="{{ product.Title }}"> {{ product.Title }}</a>
                                             </h2>
                                             <div class="price-box">
                                                 <span class="regular-price" id="product-price-170">
@@ -94,11 +94,11 @@
                                         {% endif %}
                                         {% if  (loop.index%3==0) %}
                                         <li class="item">
-                                            <a href="product_detail.html" title=" {{ product.Title }}" class="product-image">
-                                                <img src="{{ asset('bundles/bookshopbookshop/product_images/'~product.image.path~product.image.filename) }}" width="135" height="135" alt=" Shaimus - Turn The Other Way" />
+                                            <a href="{{ path('bookshop_bookshop_productDetail',{'pid': product.id})}}" title=" {{ product.Title }}" class="product-image">
+                                                <img src="{{ asset('bundles/bookshopbookshop/product_images/'~product.image.path~product.image.filename) }}" width="135" height="135" alt=" {{ product.Title }}" />
                                             </a>
                                             <h2 class="product-name">
-                                                <a href="product_detail.html" title="{{ product.Title }}"> {{ product.Title }}</a>
+                                                <a href="{{ path('bookshop_bookshop_productDetail',{'pid': product.id})}}" title="{{ product.Title }}"> {{ product.Title }}</a>
                                             </h2>
                                             <div class="price-box">
                                                 <span class="regular-price" id="product-price-170">

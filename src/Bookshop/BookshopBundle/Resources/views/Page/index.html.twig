@@ -12,21 +12,21 @@
                             {% for i in range(low=0, high=products|length-1, step=2) %}
                                 <tr class="{{ cycle(['odd', 'even'], loop.index0) }}" > 
                                     <td>
-                                     <a href="">
+                                     <a href="{{ path('bookshop_bookshop_productDetail',{'pid': products[i].id})}}">
                                         <img width="95" alt="" src="{{ asset('bundles/bookshopbookshop/product_images/'~products[i].image.path~products[i].image.filename) }}" class="product-img">
                                      </a>
                                      <div class="product-description">
-                                         <p><a href="">{{ products[i].title }}</a></p>
-                                         <p>See all <a href="">{{ products[i].category.label }}</a></p>
+                                         <p><a href="{{ path('bookshop_bookshop_productDetail',{'pid': products[i].id})}}">{{ products[i].title }}</a></p>
+                                         <p>See all <a href="{{ path('bookshop_bookshop_category',{'cid': products[i].id,'label':products[i].category.label})}}">{{ products[i].category.label }}</a></p>
                                      </div>
                                     </td>
                                     <td>
-                                     <a href="">
+                                     <a href="{{ path('bookshop_bookshop_productDetail',{'pid': products[i+1].id})}}">
                                         <img width="95" alt="" src="{{ asset('bundles/bookshopbookshop/product_images/'~products[i+1].image.path~products[i+1].image.filename) }}" class="product-img">
                                      </a>
                                      <div class="product-description">
-                                         <p><a href="">{{ products[i+1].title }}</a></p>
-                                         <p>See all <a href="">{{ products[i+1].category.label }}</a></p>
+                                         <p><a href="{{ path('bookshop_bookshop_productDetail',{'pid': products[i+1].id})}}">{{ products[i+1].title }}</a></p>
+                                         <p>See all <a href="{{ path('bookshop_bookshop_category',{'cid': products[i+1].id,'label':products[i+1].category.label})}}">{{ products[i+1].category.label }}</a></p>
                                      </div>
                                     </td> 
                                 </tr>

@@ -63,7 +63,7 @@
                                            {{ product.Description }}
                                         </div>
                                     </div>
-                                    <p><a href=""><span>&laquo;Back to list</span></a></p>
+                                    <p><a href="{{app.request.headers.get('referer' )}}"><span>&laquo;Back to list</span></a></p>
                                     <div class="box-collateral box-up-sell">
                                         <h2>You may also be interested in the following product(s)</h2>
                                         <table class="products-grid" id="upsell-product-table">
