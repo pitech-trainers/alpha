@@ -69,7 +69,6 @@ class ProductRepository extends EntityRepository
             $qb->addOrderBy("p." . $sortBy, $direction);
         }
 
-
         return $qb->getQuery()
                         ->getResult();
     }

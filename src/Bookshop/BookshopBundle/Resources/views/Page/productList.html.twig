@@ -47,6 +47,7 @@
                                                     {% if (app.request.query.has('stock')) %} <input type="hidden" value="{{ app.request.get('stock')}}" name="stock"> {% endif %}
                                                     {% if (app.request.query.has('cid')) %} <input type="hidden" value="{{ app.request.get('cid')}}" name="cid"> {% endif %}
                                                     {% if (app.request.query.has('label')) %} <input type="hidden" value="{{ app.request.get('label')}}" name="label"> {% endif %}
+                                                    {% if (app.request.query.has('search')) %} <input type="hidden" value="{{ app.request.get('search')}}" name="search"> {% endif %}
                                                     <input type="submit" />
                                                  </form>
                                             </div>
@@ -141,6 +142,7 @@
                                                     {% if (app.request.query.has('stock')) %} <input type="hidden" value="{{ app.request.get('stock')}}" name="stock"> {% endif %}
                                                     {% if (app.request.query.has('cid')) %} <input type="hidden" value="{{ app.request.get('cid')}}" name="cid"> {% endif %}
                                                     {% if (app.request.query.has('label')) %} <input type="hidden" value="{{ app.request.get('label')}}" name="label"> {% endif %}
+                                                    {% if (app.request.query.has('search')) %} <input type="hidden" value="{{ app.request.get('search')}}" name="search"> {% endif %}
                                                     <input type="submit" />
                                                  </form>
                                                 </div>
