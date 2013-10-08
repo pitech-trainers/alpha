@@ -3,13 +3,12 @@
 namespace Bookshop\BookshopBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @ORM\Entity(repositoryClass="Bookshop\BookshopBundle\Entity\Repository\CategoryRepository")
- * @ORM\Table(name="categories")
+ * @ORM\Entity
+ * @ORM\Table(name="authors")
  */
-class Category
+class Author
 {
     /**
      * @ORM\Id
@@ -19,22 +18,14 @@ class Category
     protected $id;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string" ,name="author_name")
      */
-    protected $label;
+    protected $authorName;
 
     /**
-     * @ORM\OneToMany(targetEntity="Product", mappedBy="category")
+     * @ORM\ManyToMany(targetEntity="Product", mappedBy="authors")
      */
     protected $products;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->products = new \Doctrine\Common\Collections\ArrayCollection();
-    }
     
     /**
      * Get id
@@ -47,33 +38,40 @@ class Category
     }
 
     /**
-     * Set label
+     * Set authorName
      *
-     * @param string $label
-     * @return Category
+     * @param string $authorName
+     * @return Author
      */
-    public function setLabel($label)
+    public function setAuthorName($authorName)
     {
-        $this->label = $label;
+        $this->authorName = $authorName;
     
         return $this;
     }
 
     /**
-     * Get label
+     * Get authorName
      *
      * @return string 
      */
-    public function getLabel()
+    public function getAuthorName()
     {
-        return $this->label;
+        return $this->authorName;
     }
-
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->products = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
     /**
      * Add products
      *
      * @param \Bookshop\BookshopBundle\Entity\Product $products
-     * @return Category
+     * @return Author
      */
     public function addProduct(\Bookshop\BookshopBundle\Entity\Product $products)
     {

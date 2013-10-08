@@ -1,17 +1,46 @@
 {% extends 'BookshopBookshopBundle::layout.html.twig' %}
 {% block content %}
+
 <div class="main-container col3-layout">
-				<div class="main">
-					<div class="col-wrapper">
-						<div class="col-main">
-{% block leftsidebar%}
-                                                        
-{% endblock %}
- </div>
-                                               {% block rightsidebar%}
-                                               {% endblock %}
-                                                </div>
-                                        </div>
-        </div>
+    <div class="main">
+	<div class="col-wrapper">
+            <div class="col-main">
+		<div class="box best-selling">
+                    <h3>Latest Products</h3>
+                    <table cellspacing="0" border="0">
+                        <tbody>
+                            {% for i in range(low=0, high=products|length-1, step=2) %}
+                                <tr class="{{ cycle(['odd', 'even'], loop.index0) }}" > 
+                                    <td>
+                                     <a href="">
+                                        <img width="95" alt="" src="{{ asset('bundles/bookshopbookshop/product_images/'~products[i].image.path~products[i].image.filename) }}" class="product-img">
+                                     </a>
+                                     <div class="product-description">
+                                         <p><a href="">{{ products[i].title }}</a></p>
+                                         <p>See all <a href="">{{ products[i].category.label }}</a></p>
+                                     </div>
+                                    </td>
+                                    <td>
+                                     <a href="">
+                                        <img width="95" alt="" src="{{ asset('bundles/bookshopbookshop/product_images/'~products[i+1].image.path~products[i+1].image.filename) }}" class="product-img">
+                                     </a>
+                                     <div class="product-description">
+                                         <p><a href="">{{ products[i+1].title }}</a></p>
+                                         <p>See all <a href="">{{ products[i+1].category.label }}</a></p>
+                                     </div>
+                                    </td> 
+                                </tr>
+                            {% else %}
+                                <p>There are no products...</p>
+                            {% endfor %}									
+			</tbody>
+	        </table>
+	      </div>
+	  </div>
+       {% block leftsidebar%}{% endblock %}
+    </div>
+   {% block rightsidebar%}{% endblock %}
+  </div>
+</div>
 
 {% endblock%}
