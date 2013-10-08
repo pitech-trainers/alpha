@@ -6,7 +6,7 @@
 	<div class="col-wrapper">
             <div class="col-main">
 		<div class="box best-selling">
-                    <h3>Latest Products</h3>
+                    <h3>{{ "Latest Products"|trans }}</h3>
                     <table cellspacing="0" border="0">
                         <tbody>
                             {% for i in range(low=0, high=products|length-1, step=2) %}
@@ -17,7 +17,7 @@
                                      </a>
                                      <div class="product-description">
                                          <p><a href="{{ path('bookshop_bookshop_productDetail',{'pid': products[i].id})}}">{{ products[i].title }}</a></p>
-                                         <p>See all <a href="{{ path('bookshop_bookshop_category',{'cid': products[i].id,'label':products[i].category.label})}}">{{ products[i].category.label }}</a></p>
+                                         <p>{{ "See all"|trans }} <a href="{{ path('bookshop_bookshop_category',{'cid': products[i].id,'label':products[i].category.label})}}">{{ products[i].category.label }}</a></p>
                                      </div>
                                     </td>
                                     <td>
@@ -26,12 +26,12 @@
                                      </a>
                                      <div class="product-description">
                                          <p><a href="{{ path('bookshop_bookshop_productDetail',{'pid': products[i+1].id})}}">{{ products[i+1].title }}</a></p>
-                                         <p>See all <a href="{{ path('bookshop_bookshop_category',{'cid': products[i+1].id,'label':products[i+1].category.label})}}">{{ products[i+1].category.label }}</a></p>
+                                         <p>{{ "See all"|trans }} <a href="{{ path('bookshop_bookshop_category',{'cid': products[i+1].id,'label':products[i+1].category.label})}}">{{ products[i+1].category.label }}</a></p>
                                      </div>
                                     </td> 
                                 </tr>
                             {% else %}
-                                <p>There are no products...</p>
+                                <p>{{ "There are no products"|trans }}...</p>
                             {% endfor %}									
 			</tbody>
 	        </table>

@@ -7,7 +7,7 @@
                         <div class="breadcrumbs">
                             <ul>
                                 <li class="home">
-                                    <a href="{{ path('bookshop_bookshop_homepage') }}" title="Go to Home Page">Home</a>
+                                    <a href="{{ path('bookshop_bookshop_homepage') }}" title="Go to Home Page">{{ "Home"|trans }}</a>
                                     <span>/ </span>
                                 </li>
                                 <li class="category35">
@@ -24,7 +24,7 @@
                                     <div class="toolbar">
                                         <div class="pager">
                                             <p class="amount">
-                                                <strong>{{ pagination.getTotalItemCount }} Item(s)</strong>
+                                                <strong>{{ pagination.getTotalItemCount }} {{ "Item(s)"|trans }}</strong>
                                             </p>
                                           {{ knp_pagination_render(pagination) }}                                     
                                         </div>   
@@ -32,13 +32,13 @@
                                         <div class="sorter">
                                             <div class="sort-by">
                                                 <form method="get">
-                                                    <label>Sort By</label>
+                                                    <label>{{ "Sort By"|trans }}</label>
                                                    <select name='sortBy'>
                                                      <option {% if pagination.isSorted('title') %} selected="selected" {% endif %}>{{ knp_pagination_sortable(pagination, 'title', 'title') }}</option>
                                                      <option {% if pagination.isSorted('price') %} selected="selected" {% endif %}>{{ knp_pagination_sortable(pagination, 'price', 'price') }}</option>
                                                    </select>
                                                     &nbsp;
-                                                    <label>Direction</label>
+                                                    <label>{{ "Direction"|trans }}</label>
                                                     <select name='direction'>
                                                        <option {% if pagination.isSorted('desc') %} selected="selected" {% endif %}>{{ knp_pagination_sortable(pagination, 'desc', 'desc') }}</option>
                                                        <option {% if pagination.isSorted('asc') %} selected="selected" {% endif %}>{{ knp_pagination_sortable(pagination, 'asc', 'asc') }}</option>                                                   
@@ -67,7 +67,7 @@
                                             </div>
                                             <div class="actions">
                                                 <button type="button" title="Add to Cart" class="button btn-cart" >
-                                                    <span><span>Add to Cart</span></span>
+                                                    <span><span>{{ "Add to Cart"|trans }}</span></span>
                                                 </button>
                                             </div>
                                         </li>
@@ -87,7 +87,7 @@
                                             </div>
                                             <div class="actions">
                                                 <button type="button" title="Add to Cart" class="button btn-cart" >
-                                                    <span><span>Add to Cart</span></span>
+                                                    <span><span>{{ "Add to Cart"|trans }}</span></span>
                                                 </button>
                                             </div>
                                         </li>
@@ -107,13 +107,13 @@
                                             </div>
                                             <div class="actions">
                                                 <button type="button" title="Add to Cart" class="button btn-cart" >
-                                                    <span><span>Add to Cart</span></span>
+                                                    <span><span>{{ "Add to Cart"|trans }}</span></span>
                                                 </button>
                                             </div>
                                         </li>                                
                                          {% endif %}                                     
                             {% else %}
-                                <p>There are no products...</p>
+                                <p>{{ "There are no products"|trans }}...</p>
                             {% endfor %}	
                                 </ul>                                    
                                     <div class="toolbar-bottom">
@@ -127,13 +127,13 @@
                                             <div class="sorter">
                                                 <div class="sort-by">
                                                    <form method="get">
-                                                    <label>Sort By</label>
+                                                    <label>{{ "Sort By"|trans }}</label>
                                                    <select name='sortBy'>
                                                      <option {% if pagination.isSorted('title') %} selected="selected" {% endif %}>{{ knp_pagination_sortable(pagination, 'title', 'title') }}</option>
                                                      <option {% if pagination.isSorted('price') %} selected="selected" {% endif %}>{{ knp_pagination_sortable(pagination, 'price', 'price') }}</option>
                                                    </select>
                                                     &nbsp;
-                                                    <label>Direction</label>
+                                                    <label>{{ "Direction"|trans }}</label>
                                                     <select name='direction'>
                                                        <option {% if pagination.isSorted('desc') %} selected="selected" {% endif %}>{{ knp_pagination_sortable(pagination, 'desc', 'desc') }}</option>
                                                        <option {% if pagination.isSorted('asc') %} selected="selected" {% endif %}>{{ knp_pagination_sortable(pagination, 'asc', 'asc') }}</option>
@@ -157,15 +157,15 @@
                                <div class="col-left sidebar">
                                 <div class="block block-layered-nav">
                                     <div class="block-title">
-                                        <strong><span>Shop By</span></strong>
+                                        <strong><span>{{ "Shop By"|trans }}</span></strong>
                                     </div>
                                     <div class="block-content">
                                         <div class="currently">
-                                            <p class="block-subtitle">Currently Shopping by:</p>
+                                            <p class="block-subtitle">{{ "Currently Shopping by"|trans }}:</p>
                                             <ol>
                                              {% if (app.request.query.has('cid')) %}
                                               <li>
-                                                    <span class="label">Category:</span>
+                                                    <span class="label">{{ "Category"|trans }}:</span>
                                                     {%for category in categories%}
                                                       {% if app.request.query.get('cid') == category.id %}    
                                                         <span class="value">{{category.label}}</span>
@@ -175,7 +175,7 @@
                                              {%endif%}
                                              {% if (app.request.query.has('price')) %}
                                              <li>
-                                                    <span class="label">Price:</span>
+                                                    <span class="label">{{ "Price"|trans }}:</span>
                                                     {% if app.request.query.get('price') == 1 %}    
                                                         <span class="value">00.00 $US-49.99 $US</span>
                                                     {% elseif app.request.query.get('price') == 2 %}
@@ -187,11 +187,11 @@
                                              {% endif %}
                                              {% if (app.request.query.has('stock')) %}
                                              <li>
-                                                    <span class="label">Stock:</span>
+                                                    <span class="label">{{ "Stock"|trans }}:</span>
                                                     {% if app.request.query.get('stock') == 1 %}    
-                                                        <span class="value">Available</span>
+                                                        <span class="value">{{ "Available"|trans }}</span>
                                                     {% elseif app.request.query.get('stock') == 0 %}
-                                                        <span class="value">Soon</span>                                              
+                                                        <span class="value">{{ "Soon"|trans }}</span>                                              
                                                     {% endif %}
                                              </li>  
                                              {% endif %}                                                                                                                              
@@ -215,10 +215,10 @@
                                           {% endif %} 
                                          {% endif %}
                                         </div>
-                                        <p class="block-subtitle">Shopping Options</p>
+                                        <p class="block-subtitle">{{ "Shopping Options"|trans }}</p>
                                         <dl id="narrow-by-list">
                                             {% if (app.request.attributes.get('_route' )== 'bookshop_bookshop_search')%}
-                                            <dt>Category</dt>
+                                            <dt>{{ "Category"|trans }}</dt>
                                             <dd>
                                                 <ol>
                                                     {% for category in categories %}
@@ -230,7 +230,7 @@
                                                 </ol>
                                             </dd>
                                             {% endif %}
-                                            <dt>Price</dt>
+                                            <dt>{{ "Price"|trans }}</dt>
                                             <dd>
                                                 <ol>                                                                                                 
                                                     <li><a href="{{ path(app.request.attributes.get('_route' ),app.request.query.all|merge({'price':'1'})) }}">
@@ -247,16 +247,16 @@
                                                     </li>                                                                                                   
                                                 </ol>
                                             </dd>                                     
-                                            <dt>Stock</dt>
+                                            <dt>{{ "Stock"|trans }}</dt>
                                             <dd>
                                                 <ol>
                                                     <li><a href="{{ path(app.request.attributes.get('_route' ),app.request.query.all|merge({'stock':'1'})) }}">
-                                                        Available
+                                                        {{ "Available"|trans }}
                                                         
                                                         </a>
                                                     </li>
                                                     <li><a href="{{ path(app.request.attributes.get('_route' ),app.request.query.all|merge({'stock':'0'})) }}">                                                           
-                                                        Soon
+                                                       {{ "Soon"|trans }}
                                                         </a>
                                                     </li>
                                                 </ol>
