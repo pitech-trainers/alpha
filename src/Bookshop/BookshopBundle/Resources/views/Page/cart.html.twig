@@ -17,7 +17,7 @@
                     </ul>
                 </div>
               
-            
+             <form action="{{ path('BookshopBookshopBundle_product_process') }}" method="post">
                     <fieldset>
                         <table id="shopping-cart-table" class="data-table cart-table">
                             <colgroup>
@@ -85,10 +85,9 @@
                                             <td class="a-center last">
                                            
                                                 
-                                              <form action="{{ path('BookshopBookshopBundle_product_remove') }}" method="post">
-                                                  <input type='hidden' name='id' value= '{{item.getId}}'>
-                                              <button type='submit'><a href="" title="Remove item" class="btn-remove btn-remove2"> Remove Item </a></button>
-                                              </form>
+                                             
+                                                  <input type='hidden' name='id[{{loop.index}}]' value= '{{item.getProductId}}'>
+                                              <button type='submit' name='remove'><a href="" title="Remove item" class="btn-remove btn-remove2"> Remove Item </a></button>
                                                 
                                             </td>
                                             
@@ -98,7 +97,7 @@
                                     </tbody>
                                 </table>
                             </fieldset>
-                      
+                        </form>
 
                         <div class="cart-collaterals">
                             <div class="totals">

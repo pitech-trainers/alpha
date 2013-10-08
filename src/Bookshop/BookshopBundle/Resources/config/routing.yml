@@ -32,3 +32,9 @@ BookshopBookshopBundle_product_update:
     defaults: { _controller: BookshopBookshopBundle:Cart:update }
     requirements:
         _method:  POST     
+        
+BookshopBookshopBundle_product_process:
+    pattern:  /product_process
+    defaults: { _controller: BookshopBookshopBundle:Cart:processForm }
+    requirements:
+        _method:  POST         

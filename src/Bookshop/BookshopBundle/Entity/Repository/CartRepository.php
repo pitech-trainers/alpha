@@ -2,6 +2,7 @@
 
 namespace Bookshop\BookshopBundle\Entity\Repository;
 
+use Bookshop\BookshopBundle\Entity\Cart;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -24,6 +25,29 @@ class CartRepository extends EntityRepository {
         return $qd->getQuery()
                         ->getResult();
     }
-  
+
+    public function createCart($user, $em, $items = null) {
+
+        $cart = new Cart();
+        $cart->setDate('2000-01-01');
+        $cart->setActive(1);
+        $cart->setTotal(0);
+        $cart->setUserId($user);
+        $em->persist($cart);
+        $old = $this->getCartForUser($user);
+        foreach ($old as $oldcart) {
+            $oldcart->setActive(0);
+        }
+        $em->flush();
+         if (!is_null($items)) {
+            foreach ($items as $item) {
+                
+                $item->setCart($cart);
+                $em->persist($item);
+                $cart->addCartItem($item);
+            }
+        }
+        $em->flush();
+    }
 
 }

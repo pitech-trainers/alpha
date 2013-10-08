@@ -3,24 +3,28 @@
 namespace Bookshop\BookshopBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Bookshop\BookshopBundle\Controller\CartItemController;
-
+use Bookshop\BookshopBundle\Entity\CartItem;
+use Bookshop\BookshopBundle\Entity\Cart;
 class CartController extends Controller {
 
     public function cartPageAction() {
         $em = $this->getDoctrine()
                 ->getManager();
-        $cart = $em->getRepository('BookshopBookshopBundle:Cart')->getCartForUser($this->getUser());
-        $cart = $cart[0];
+        $cart = $this->init($em);
         return $this->render('BookshopBookshopBundle:Page:cart.html.twig', array('cart' => $cart));
     }
 
     public function addAction() {
+
+        $quantity = 1;
         $em = $this->getDoctrine()->getManager();
+        if (isset($_POST['quantity'])) {
+            $quantity = $_POST['quantity'];
+        }
         $cart = $this->init($em);
-        $cartItemController = new CartItemController();
-        $cartItem = $cartItemController->newItem($_POST['id'], $_POST['price'], $_POST['title'], $cart);
-        if (!$this->updateAction($_POST['quantity'])) {
+        $cartItem = new CartItem();
+        $cartItem = $cartItem->newItem($_POST['id'], $_POST['price'], $_POST['title'], $cart, $quantity);
+        if (!$this->updateAction($quantity)) {
             $cart->addCartItem($cartItem);
         }
 
@@ -29,19 +33,18 @@ class CartController extends Controller {
     }
 
     public function removeAction() {
+        $i = 0;
         $em = $this->getDoctrine()->getManager();
         $cart = $this->init($em);
-
         foreach ($cart->getCartItems() as $item) {
-
-            if (isset($_POST['clear']) || $item->getId() == $_POST['id']) {
+            $i++;
+            if (isset($_POST['update_cart_action']) || $item->getProductId() == $_POST['id'][$i]) {
                 $cart->removeCartItem($item);
                 $item->setCart(null);
                 $em->flush();
                 return $this->redirect($this->getRequest()->headers->get("referer"));
             }
         }
-
         return $this->redirect($this->getRequest()->headers->get("referer"));
     }
 
@@ -49,29 +52,46 @@ class CartController extends Controller {
         $i = 0;
         $em = $this->getDoctrine()->getManager();
         $cart = $this->init($em);
-
         foreach ($cart->getCartItems() as $item) {
-            $quantity = $_POST['quantity'][$i];
             $i++;
-            if ($item->getProductId() == $_POST['id']) {
-
-
-                if ($add != false) {
-                    $quantity+=$add;
+            if ($add == false) {
+                if ($item->getProductId() == $_POST['id'][$i]) {
+                    $item->setQuantity($_POST['quantity'][$i]);
+                    $em->flush();
+                    return $this->redirect($this->getRequest()->headers->get("referer"));
                 }
-                $item->setQuantity($quantity);
+            } elseif ($item->getProductId() == $_POST['id']) {
+                $item->setQuantity($item->getQuantity() + $add);
+                $em->flush();
                 return true;
             }
         }
     }
 
     protected function init($em) {
-
         $cart = $em->getRepository('BookshopBookshopBundle:Cart')->getCartForUser($this->getUser());
+        if(sizeof($cart)!=0){
         $cart = $cart[0];
+        }elseif(isset($_SESSION['cart'])){
+           $cart=$_SESSION['cart'];
+        }
+        else{
+             $_SESSION['cart']=new Cart();
+             $cart=$_SESSION['cart'];
+        }  
+        return $cart;
+    }
 
-        if (isset($_POST['id'])) {
-            return $cart;
+    public function processFormAction() {
+        if (isset($_POST['update_cart_action'])) {
+            if ($_POST['update_cart_action'] == 'update_qty') {
+                return $this->updateAction();
+            } else {
+                return $this->removeAction();
+            }
+        }
+        if (isset($_POST['remove'])) {
+            return $this->removeAction();
         }
     }
 

@@ -19,19 +19,12 @@ class LoginListener {
         $em = $this->doctrine
                 ->getManager();
         $user = $event->getAuthenticationToken()->getUser();
-        $cart = new Cart();
-        $cart->setDate('2000-01-01');
-        $cart->setActive(1);
-        $cart->setTotal(0);
-        $cart->setUserId($user);
-        $em->persist($cart);
-        $old = $em->getRepository('BookshopBookshopBundle:Cart')->getCartForUser($user);
-        foreach ($old as $cart) {
-            $cart->setActive(0);
+        $items=null;
+        if(isset($_SESSION['cart'])){
+            $cart=$_SESSION['cart'];
+            $items=$cart->getCartItems();
         }
-
-        $em->flush();
-      
+        $em->getRepository(('BookshopBookshopBundle:Cart'))->createCart($user,$em,$items);
     }
 
 }

@@ -1,53 +1,65 @@
-<?php 
+<?php
+
 namespace Bookshop\BookshopBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
-
 /**
  * @ORM\Entity(repositoryClass="Bookshop\BookshopBundle\Entity\Repository\CartItemRepository")
  * @ORM\Table(name="cart_items")
  */
-class CartItem
-{
-        /**
+class CartItem {
+
+    /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
     /**
      * @ORM\ManyToOne(targetEntity="Cart", inversedBy="cart_items")
      * @ORM\JoinColumn(name="cart_id", referencedColumnName="id")
      */
     protected $cart;
-     /**
+
+    /**
      * @ORM\Column(type="integer")
      */
     protected $product_id;
-     /**
+
+    /**
      * @ORM\Column(type="string")
      */
     protected $title;
-     /**
+
+    /**
      * @ORM\Column(type="integer")
      */
     protected $quantity;
-     /**
+
+    /**
      * @ORM\Column(type="string")
      */
     protected $price;
-    
-    
+
+    public function newItem($productId, $price = null, $title = null, $cart = null, $quantity) {
+        $cartItem = new CartItem();
+        $cartItem->setPrice($price);
+        $cartItem->setTitle($title);
+        $cartItem->setQuantity($quantity);
+        $cartItem->setCart($cart);
+        $cartItem->setProductId($productId);
+        return $cartItem;
+    }
 
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -57,10 +69,9 @@ class CartItem
      * @param integer $productId
      * @return CartItem
      */
-    public function setProductId($productId)
-    {
+    public function setProductId($productId) {
         $this->product_id = $productId;
-    
+
         return $this;
     }
 
@@ -69,8 +80,7 @@ class CartItem
      *
      * @return integer 
      */
-    public function getProductId()
-    {
+    public function getProductId() {
         return $this->product_id;
     }
 
@@ -80,10 +90,9 @@ class CartItem
      * @param string $title
      * @return CartItem
      */
-    public function setTitle($title)
-    {
+    public function setTitle($title) {
         $this->title = $title;
-    
+
         return $this;
     }
 
@@ -92,8 +101,7 @@ class CartItem
      *
      * @return string 
      */
-    public function getTitle()
-    {
+    public function getTitle() {
         return $this->title;
     }
 
@@ -103,10 +111,9 @@ class CartItem
      * @param integer $quantity
      * @return CartItem
      */
-    public function setQuantity($quantity)
-    {
+    public function setQuantity($quantity) {
         $this->quantity = $quantity;
-    
+
         return $this;
     }
 
@@ -115,8 +122,7 @@ class CartItem
      *
      * @return integer 
      */
-    public function getQuantity()
-    {
+    public function getQuantity() {
         return $this->quantity;
     }
 
@@ -126,10 +132,9 @@ class CartItem
      * @param string $price
      * @return CartItem
      */
-    public function setPrice($price)
-    {
+    public function setPrice($price) {
         $this->price = $price;
-    
+
         return $this;
     }
 
@@ -138,8 +143,7 @@ class CartItem
      *
      * @return string 
      */
-    public function getPrice()
-    {
+    public function getPrice() {
         return $this->price;
     }
 
@@ -149,10 +153,9 @@ class CartItem
      * @param \Bookshop\BookshopBundle\Entity\Cart $cartId
      * @return CartItem
      */
-    public function setCartId(\Bookshop\BookshopBundle\Entity\Cart $cartId = null)
-    {
+    public function setCartId(\Bookshop\BookshopBundle\Entity\Cart $cartId = null) {
         $this->cart_id = $cartId;
-    
+
         return $this;
     }
 
@@ -161,8 +164,7 @@ class CartItem
      *
      * @return \Bookshop\BookshopBundle\Entity\Cart 
      */
-    public function getCartId()
-    {
+    public function getCartId() {
         return $this->cart_id;
     }
 
@@ -172,10 +174,9 @@ class CartItem
      * @param \Bookshop\BookshopBundle\Entity\Cart $cart
      * @return CartItem
      */
-    public function setCart(\Bookshop\BookshopBundle\Entity\Cart $cart = null)
-    {
+    public function setCart(\Bookshop\BookshopBundle\Entity\Cart $cart = null) {
         $this->cart = $cart;
-    
+
         return $this;
     }
 
@@ -184,8 +185,8 @@ class CartItem
      *
      * @return \Bookshop\BookshopBundle\Entity\Cart 
      */
-    public function getCart()
-    {
+    public function getCart() {
         return $this->cart;
     }
+
 }
