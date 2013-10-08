@@ -73,13 +73,20 @@ class ProductRepository extends EntityRepository
                         ->getResult();
     }
     
-    public function getRandomFour($cid){
+    public function getRandom($cid){
         $qb = $this->createQueryBuilder('p')
                       ->select('p')
                       ->where('p.category='.$cid);
            
          $list = $qb->getQuery()->getResult();
-         $keys = array_rand($list,4);
+         if (sizeof($list)<4){
+             $limit=sizeof($list);
+         }
+         else
+         { 
+             $limit=4;
+         }
+         $keys = array_rand($list,$limit);
          $random = array(); 
          for ($i=0;$i<sizeof($keys);$i++){         
              $random[$i]=$list[$keys[$i]];

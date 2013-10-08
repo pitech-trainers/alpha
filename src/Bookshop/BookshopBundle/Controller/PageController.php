@@ -57,7 +57,7 @@ class PageController extends Controller
                    ->getManager();
        $product = $em->getRepository('BookshopBookshopBundle:Product')->find($pid);
        $id = $product->getCategory()->getId();
-       $random = $em->getRepository('BookshopBookshopBundle:Product')->getRandomFour($id);
+       $random = $em->getRepository('BookshopBookshopBundle:Product')->getRandom($id);
 
         return $this->render('BookshopBookshopBundle:Page:productDetail.html.twig',array('product' => $product, 'random' => $random));  
     }
