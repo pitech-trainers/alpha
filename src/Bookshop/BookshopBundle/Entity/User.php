@@ -42,6 +42,20 @@ class User extends BaseUser {
      */
     protected $mobile;
 
+    /**
+     * @ORM\OneToOne(targetEntity="Address")
+     * @ORM\JoinColumn(name="shipping_id", referencedColumnName="id")
+     **/
+    protected $shipping_address;
+    
+     /**
+     * @ORM\Column(type="string")
+     */
+     /**
+     * @ORM\OneToOne(targetEntity="Address")
+     * @ORM\JoinColumn(name="billing_id", referencedColumnName="id")
+     **/
+    protected $billing_address;
     
       
     protected $cart;
@@ -191,5 +205,51 @@ class User extends BaseUser {
     public function removeCart(\Bookshop\BookshopBundle\Entity\Cart $cart)
     {
         $this->cart->removeElement($cart);
+    }
+
+    /**
+     * Set shipping_address
+     *
+     * @param string $shippingAddress
+     * @return User
+     */
+    public function setShippingAddress($shippingAddress)
+    {
+        $this->shipping_address = $shippingAddress;
+    
+        return $this;
+    }
+
+    /**
+     * Get shipping_address
+     *
+     * @return string 
+     */
+    public function getShippingAddress()
+    {
+        return $this->shipping_address;
+    }
+
+    /**
+     * Set billing_address
+     *
+     * @param string $billingAddress
+     * @return User
+     */
+    public function setBillingAddress($billingAddress)
+    {
+        $this->billing_address = $billingAddress;
+    
+        return $this;
+    }
+
+    /**
+     * Get billing_address
+     *
+     * @return string 
+     */
+    public function getBillingAddress()
+    {
+        return $this->billing_address;
     }
 }
